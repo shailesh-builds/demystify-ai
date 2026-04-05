@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demystify AI — Learn how LLMs actually work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f0e0c;
+  --paper: #f5f2eb;
+  --accent: #c8410a;
+  --accent2: #2a6dd9;
+  --muted: #6b6760;
+  --border: rgba(15,14,12,0.12);
+  --card: #ffffff;
+  --purple: #534AB7;
+  --teal: #1D9E75;
+  --coral: #D85A30;
+  --amber: #BA7517;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 0 clamp(1.5rem, 5vw, 5rem);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -10%; right: -5%;
+  width: 55vw; height: 55vw;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -15%; left: -8%;
+  width: 40vw; height: 40vw;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  pointer-events: none;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+}
+.logo span { color: var(--accent); font-style: italic; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 400;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--ink) !important;
+  color: var(--paper) !important;
+  padding: 0.5rem 1.25rem;
+  border-radius: 100px;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+}
+
+.hero-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 0 3rem;
+  max-width: 860px;
+}
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px; height: 1px;
+  background: var(--accent);
+}
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+h1 em { font-style: italic; color: var(--accent); }
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--muted);
+  max-width: 560px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.875rem 2rem;
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,65,10,0.25); }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--ink);
+  padding: 0.875rem 2rem;
+  border-radius: 100px;
+  font-weight: 400;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 0.5px solid var(--border);
+  transition: background .2s;
+  cursor: pointer;
+}
+.btn-secondary:hover { background: rgba(15,14,12,0.04); }
+
+.hero-foot {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 0;
+  border-top: 0.5px solid var(--border);
+  flex-wrap: wrap;
+}
+.stat { display: flex; flex-direction: column; }
+.stat-num { font-family: 'DM Serif Display', serif; font-size: 1.8rem; line-height: 1; }
+.stat-lbl { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+.stat-div { width: 1px; height: 40px; background: var(--border); }
+
+/* ── SECTION SHARED ── */
+section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem); }
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+h2 em { font-style: italic; color: var(--accent); }
+
+/* ── WHAT YOU GET ── */
+.what { background: var(--ink); color: var(--paper); }
+.what .section-label { color: rgba(245,242,235,0.4); }
+.what h2 { color: var(--paper); }
+.what h2 em { color: #f0896a; }
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: rgba(245,242,235,0.1);
+  border: 1px solid rgba(245,242,235,0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 3rem;
+}
+.module-card {
+  background: var(--ink);
+  padding: 2rem;
+  transition: background .2s;
+  position: relative;
+}
+.module-card:hover { background: #1a1917; }
+.module-tag {
+  font-size: 0.7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+  display: inline-block;
+  font-weight: 500;
+}
+.tag-free { background: rgba(29,158,117,0.2); color: #5DCAA5; }
+.tag-locked { background: rgba(200,65,10,0.2); color: #f0896a; }
+.module-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  color: var(--paper);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+.module-desc {
+  font-size: 0.875rem;
+  color: rgba(245,242,235,0.5);
+  line-height: 1.6;
+}
+.lock-icon {
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  font-size: 0.875rem;
+  color: rgba(245,242,235,0.2);
+}
+
+/* ── FREEMIUM ── */
+.pricing {
+  background: var(--paper);
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.price-card {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+}
+.price-card.featured {
+  border-color: var(--accent);
+  border-width: 1.5px;
+}
+.featured-badge {
+  position: absolute;
+  top: -12px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.price-tier { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 0.5rem; }
+.price-amount { font-family: 'DM Serif Display', serif; font-size: 2.8rem; line-height: 1; margin-bottom: 0.25rem; }
+.price-amount span { font-size: 1rem; font-family: 'DM Sans', sans-serif; color: var(--muted); }
+.price-desc { font-size: 0.875rem; color: var(--muted); margin-bottom: 1.5rem; }
+.price-features { list-style: none; margin-bottom: 2rem; }
+.price-features li {
+  font-size: 0.875rem;
+  padding: 0.4rem 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  border-bottom: 0.5px solid var(--border);
+}
+.price-features li:last-child { border-bottom: none; }
+.feat-yes { color: var(--teal); font-weight: 500; flex-shrink: 0; }
+.feat-no { color: var(--muted); flex-shrink: 0; }
+.price-btn {
+  width: 100%;
+  padding: 0.875rem;
+  border-radius: 100px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all .2s;
+}
+.price-btn-outline {
+  background: transparent;
+  border: 0.5px solid var(--border);
+  color: var(--ink);
+}
+.price-btn-outline:hover { background: rgba(15,14,12,0.04); }
+.price-btn-fill {
+  background: var(--accent);
+  color: #fff;
+}
+.price-btn-fill:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,65,10,0.3); }
+.price-btn-dark {
+  background: var(--ink);
+  color: var(--paper);
+}
+.price-btn-dark:hover { background: #2a2825; }
+
+/* ── APP SHELL ── */
+#app {
+  display: none;
+  min-height: 100vh;
+  background: var(--paper);
+}
+.app-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--paper);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.app-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+}
+.app-logo span { color: var(--accent); font-style: italic; }
+.app-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(15,14,12,0.05);
+  padding: 4px;
+  border-radius: 100px;
+}
+.app-tab {
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.app-tab.active {
+  background: var(--card);
+  color: var(--ink);
+  font-weight: 500;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+.app-tab.locked { opacity: 0.5; }
+.app-tab.locked::after { content: ' 🔒'; font-size: 10px; }
+.exit-btn {
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+.exit-btn:hover { background: rgba(15,14,12,0.05); color: var(--ink); }
+
+.app-panel { display: none; padding: 2rem; max-width: 900px; margin: 0 auto; }
+.app-panel.active { display: block; }
+
+/* ── MODULE PANELS ── */
+.module-hero {
+  border-bottom: 0.5px solid var(--border);
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+.module-hero h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.module-hero p { color: var(--muted); font-size: 1rem; }
+
+/* ── STEP JOURNEY ── */
+.prog-bar { display: flex; gap: 4px; margin-bottom: 1.5rem; }
+.prog-seg { height: 3px; flex: 1; border-radius: 2px; background: var(--border); transition: background .3s; }
+.prog-seg.done { background: var(--accent); }
+.step-tabs { display: flex; gap: 0; border: 0.5px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.step-tab {
+  flex: 1; min-width: 80px;
+  padding: 10px 8px;
+  font-size: 11px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-right: 0.5px solid var(--border);
+  cursor: pointer;
+  color: var(--muted);
+  transition: all .15s;
+  line-height: 1.3;
+}
+.step-tab:last-child { border-right: none; }
+.step-tab.active { background: var(--ink); color: var(--paper); font-weight: 500; }
+.step-tab-dot { width: 6px; height: 6px; border-radius: 50%; margin: 0 auto 4px; opacity: 0.4; }
+.step-tab.active .step-tab-dot { opacity: 1; }
+.step-content { display: none; }
+.step-content.active { display: block; }
+
+/* ── CARDS ── */
+.info-card {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+.info-card h4 { font-weight: 500; font-size: 1rem; margin-bottom: 0.25rem; }
+.info-card p, .info-card li { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+.card-row { display: flex; gap: 10px; margin-bottom: 1rem; flex-wrap: wrap; }
+.mini-stat {
+  flex: 1; min-width: 110px;
+  background: rgba(15,14,12,0.04);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.mini-stat-val { font-family: 'DM Serif Display', serif; font-size: 1.4rem; }
+.mini-stat-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+.callout-info { background: #e8f0fc; border-left: 2px solid var(--accent2); border-radius: 0 10px 10px 0; padding: 10px 14px; margin: 10px 0; font-size: 0.875rem; color: #0c447c; }
+.callout-warn { background: #fdf3e3; border-left: 2px solid var(--amber); border-radius: 0 10px 10px 0; padding: 10px 14px; margin: 10px 0; font-size: 0.875rem; color: #633806; }
+.callout-ok { background: #eaf6f1; border-left: 2px solid var(--teal); border-radius: 0 10px 10px 0; padding: 10px 14px; margin: 10px 0; font-size: 0.875rem; color: #085041; }
+
+.token-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.tok { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 13px; font-family: 'DM Mono', monospace; border: 1px solid; font-weight: 400; }
+
+.nav-row { display: flex; gap: 8px; margin-top: 1.5rem; flex-wrap: wrap; align-items: center; }
+.nav-btn {
+  padding: 8px 20px;
+  font-size: 0.875rem;
+  border: 0.5px solid var(--border);
+  border-radius: 100px;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  transition: background .15s;
+}
+.nav-btn:hover { background: rgba(15,14,12,0.04); }
+.nav-btn-accent {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.nav-btn-accent:hover { box-shadow: 0 4px 14px rgba(200,65,10,0.3); transform: translateY(-1px); background: var(--accent); }
+
+/* ── VECTOR SPACE ── */
+.vec-space {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: rgba(15,14,12,0.03);
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 1rem 0;
+  cursor: crosshair;
+}
+.vec-dot {
+  position: absolute;
+  border-radius: 50%;
+  transition: all .4s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vec-lbl {
+  position: absolute;
+  font-size: 11px;
+  font-weight: 500;
+  pointer-events: none;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── TEMPERATURE ── */
+.temp-outputs { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+.temp-output {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  transition: all .3s;
+}
+.temp-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; font-family: 'DM Mono', monospace; }
+
+/* ── RATINGS ── */
+.rating-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
+.rating-card {
+  flex: 1; min-width: 160px;
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+.stars { color: var(--amber); font-size: 13px; letter-spacing: 1px; margin-bottom: 4px; }
+.rating-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ── GATE OVERLAY ── */
+.gate-overlay {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.gate-blur {
+  filter: blur(4px);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.4;
+}
+.gate-card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245,242,235,0.9);
+  border-radius: 14px;
+  padding: 2rem;
+  text-align: center;
+}
+.gate-card h4 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem; }
+.gate-card p { font-size: 0.875rem; color: var(--muted); margin-bottom: 1.5rem; max-width: 320px; }
+
+/* ── EMAIL GATE MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15,14,12,0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+.modal h3 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 0.5rem; }
+.modal p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; }
+.modal input[type=email], .modal input[type=text] {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+  outline: none;
+  transition: border-color .2s;
+}
+.modal input:focus { border-color: var(--accent); }
+.modal .btn-primary { width: 100%; justify-content: center; margin-bottom: 0.75rem; }
+.modal-close { font-size: 0.8rem; color: var(--muted); background: none; border: none; cursor: pointer; text-decoration: underline; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  color: rgba(245,242,235,0.5);
+  padding: 3rem clamp(1.5rem, 5vw, 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+footer .logo { color: var(--paper); }
+footer p { font-size: 0.8rem; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .app-tabs { overflow-x: auto; border-radius: 8px; }
+  h1 { font-size: 2.5rem; }
+  .nav-links { display: none; }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.hero-body > * { animation: fadeUp .6s ease forwards; }
+.hero-body > *:nth-child(1) { animation-delay: .1s; opacity: 0; }
+.hero-body > *:nth-child(2) { animation-delay: .2s; opacity: 0; }
+.hero-body > *:nth-child(3) { animation-delay: .3s; opacity: 0; }
+.hero-body > *:nth-child(4) { animation-delay: .4s; opacity: 0; }
+.hero-body > *:nth-child(5) { animation-delay: .5s; opacity: 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     PASSWORD GATE
+     SHA-256 hash of "DEMYSTIFY2025" (placeholder)
+     Replace STORED_HASH with your own hash.
+     How to generate yours — open browser console (F12) and run:
+       await crypto.subtle.digest('SHA-256', new TextEncoder().encode('YourPassword'))
+         .then(b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''))
+     Copy the 64-char result and paste it below as STORED_HASH value.
+═══════════════════════════════════════════ -->
+<div id="pw-gate" style="
+  position:fixed;inset:0;z-index:9999;
+  background:#0f0e0c;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:2rem;
+  font-family:'DM Sans',sans-serif;
+">
+  <div style="max-width:400px;width:100%;text-align:center">
+
+    <!-- Logo -->
+    <div style="
+      font-family:'DM Serif Display',serif;
+      font-size:1.6rem;
+      color:#f5f2eb;
+      margin-bottom:0.5rem;
+      letter-spacing:-0.01em;
+    ">Demystify <span style="color:#c8410a;font-style:italic">AI</span></div>
+
+    <p style="font-size:0.8rem;color:#6b6760;margin-bottom:3rem;letter-spacing:.06em;text-transform:uppercase">Private access</p>
+
+    <!-- Card -->
+    <div style="
+      background:#1a1917;
+      border:0.5px solid rgba(245,242,235,0.08);
+      border-radius:20px;
+      padding:2.5rem 2rem;
+    ">
+      <p style="font-size:1.1rem;color:#f5f2eb;font-family:'DM Serif Display',serif;margin-bottom:0.5rem">Welcome back</p>
+      <p style="font-size:0.85rem;color:#6b6760;margin-bottom:2rem">This site is access-restricted.<br>Enter the password to continue.</p>
+
+      <input
+        type="password"
+        id="pw-input"
+        placeholder="Password"
+        onkeydown="if(event.key==='Enter')checkPassword()"
+        style="
+          width:100%;
+          padding:0.875rem 1rem;
+          background:rgba(245,242,235,0.05);
+          border:0.5px solid rgba(245,242,235,0.12);
+          border-radius:10px;
+          font-size:1rem;
+          font-family:'DM Sans',sans-serif;
+          color:#f5f2eb;
+          outline:none;
+          margin-bottom:0.75rem;
+          transition:border-color .2s;
+          text-align:center;
+          letter-spacing:.15em;
+        "
+        onfocus="this.style.borderColor='rgba(200,65,10,0.6)'"
+        onblur="this.style.borderColor='rgba(245,242,235,0.12)'"
+      >
+
+      <div id="pw-error" style="
+        font-size:0.8rem;
+        color:#f0896a;
+        min-height:1.2rem;
+        margin-bottom:0.75rem;
+        transition:opacity .2s;
+        opacity:0;
+      ">Incorrect password. Please try again.</div>
+
+      <button
+        onclick="checkPassword()"
+        style="
+          width:100%;
+          padding:0.875rem;
+          background:#c8410a;
+          color:#fff;
+          border:none;
+          border-radius:100px;
+          font-size:0.95rem;
+          font-weight:500;
+          font-family:'DM Sans',sans-serif;
+          cursor:pointer;
+          transition:all .2s;
+          letter-spacing:.02em;
+        "
+        onmouseover="this.style.background='#b53a08'"
+        onmouseout="this.style.background='#c8410a'"
+      >Enter →</button>
+    </div>
+
+    <p style="font-size:0.72rem;color:#3d3b38;margin-top:2rem">
+      © 2025 [COMPANY NAME] · All rights reserved
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     LANDING PAGE
+═══════════════════════════════════════════ -->
+<div id="landing" style="display:none">
+
+<section class="hero">
+  <nav>
+    <div class="logo">Demystify <span>AI</span></div>
+    <div class="nav-links">
+      <a href="#what">What's inside</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#" onclick="openFreeModule()" class="nav-cta">Try free →</a>
+    </div>
+  </nav>
+
+  <div class="hero-body">
+    <div class="eyebrow">AI literacy for the real world</div>
+    <h1>How does an<br><em>LLM actually</em><br>work?</h1>
+    <p class="hero-sub">Not the hype. Not the fear. The real mechanics — from raw internet text to the answer you get — explained through interactive examples anyone can follow.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openFreeModule()">Start for free →</button>
+      <button class="btn-secondary" onclick="scrollToPricing()">See full access</button>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <div class="stat"><div class="stat-num">6</div><div class="stat-lbl">Interactive stages</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">Real examples</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-lbl">Lines of code needed</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-lbl">Times you can revisit</div></div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section class="what" id="what">
+  <div class="section-label">What's inside</div>
+  <h2>From raw data to<br><em>your answer</em> — every step</h2>
+  <div class="modules-grid">
+    <div class="module-card">
+      <div class="module-tag tag-free">Free</div>
+      <div class="module-title">How LLMs are built</div>
+      <div class="module-desc">The full journey: data → tokens → pre-training → fine-tuning → RLHF. One story, six stages.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-tag tag-free">Free — one example</div>
+      <div class="module-title">"What is the capital of France?"</div>
+      <div class="module-desc">See how a simple factual question gets tokenised, embedded, attended to, and answered.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-tag tag-locked">Full access</div>
+      <span class="lock-icon">🔒</span>
+      <div class="module-title">"Uncle → Aunt" — semantic reasoning</div>
+      <div class="module-desc">Watch the model navigate gender in vector space. The king−man+woman=queen moment, made visual.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-tag tag-locked">Full access</div>
+      <span class="lock-icon">🔒</span>
+      <div class="module-title">Open-ended generation + temperature</div>
+      <div class="module-desc">Write a paragraph on the Renaissance. Drag the temperature slider and watch creativity change.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-tag tag-locked">Full access</div>
+      <span class="lock-icon">🔒</span>
+      <div class="module-title">Fine-tuned for a niche: medical AI</div>
+      <div class="module-desc">Same base model, different fine-tuning. See why a general model and a medical AI answer differently.</div>
+    </div>
+    <div class="module-card">
+      <div class="module-tag tag-locked">Full access</div>
+      <span class="lock-icon">🔒</span>
+      <div class="module-title">Model comparison lab</div>
+      <div class="module-desc">GPT vs Claude vs Gemini — same question, different models. Understand why they diverge.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2>Start free.<br>Go deeper when <em>ready.</em></h2>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-tier">Free forever</div>
+      <div class="price-amount">₹0</div>
+      <div class="price-desc">No card. No signup. Start learning now.</div>
+      <ul class="price-features">
+        <li><span class="feat-yes">✓</span> How LLMs are built — full journey</li>
+        <li><span class="feat-yes">✓</span> One interactive example (capital of France)</li>
+        <li><span class="feat-yes">✓</span> All foundational terms explained</li>
+        <li><span class="feat-no">—</span> Uncle → Aunt semantic example</li>
+        <li><span class="feat-no">—</span> Temperature slider & open-ended generation</li>
+        <li><span class="feat-no">—</span> Niche / fine-tuned model examples</li>
+        <li><span class="feat-no">—</span> Model comparison lab</li>
+      </ul>
+      <button class="price-btn price-btn-outline" onclick="openFreeModule()">Start for free →</button>
+    </div>
+    <div class="price-card featured">
+      <div class="featured-badge">Most popular</div>
+      <div class="price-tier">Full access</div>
+      <div class="price-amount">₹999 <span>one-time</span></div>
+      <div class="price-desc">Everything. Forever. No subscription.</div>
+      <ul class="price-features">
+        <li><span class="feat-yes">✓</span> Everything in Free</li>
+        <li><span class="feat-yes">✓</span> All 4 interactive examples</li>
+        <li><span class="feat-yes">✓</span> Temperature simulator</li>
+        <li><span class="feat-yes">✓</span> Semantic vector space explorer</li>
+        <li><span class="feat-yes">✓</span> Fine-tuned model comparison</li>
+        <li><span class="feat-yes">✓</span> Model comparison lab</li>
+        <li><span class="feat-yes">✓</span> Lifetime updates</li>
+      </ul>
+      <button class="price-btn price-btn-fill" onclick="openGate('individual')">Get full access →</button>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Teams & corporate</div>
+      <div class="price-amount">₹ <span>custom</span></div>
+      <div class="price-desc">AI onboarding for your whole team. White-labelled. Facilitator deck included.</div>
+      <ul class="price-features">
+        <li><span class="feat-yes">✓</span> Everything in Full access</li>
+        <li><span class="feat-yes">✓</span> Bulk seat licensing</li>
+        <li><span class="feat-yes">✓</span> White-label / co-branding</li>
+        <li><span class="feat-yes">✓</span> Facilitator guide + slide deck</li>
+        <li><span class="feat-yes">✓</span> Live walkthrough session</li>
+        <li><span class="feat-yes">✓</span> Usage analytics dashboard</li>
+        <li><span class="feat-yes">✓</span> Custom examples for your industry</li>
+      </ul>
+      <button class="price-btn price-btn-dark" onclick="openGate('corporate')">Talk to us →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="logo" style="margin-bottom:0.5rem">Demystify <span>AI</span></div>
+    <p style="font-size:0.8rem;margin-bottom:0.25rem">A product by <strong style="color:var(--paper)">[COMPANY NAME]</strong> · Hyderabad, India</p>
+    <p style="font-size:0.75rem">Built by Shailesh · consultant, learner, builder.</p>
+  </div>
+  <div style="text-align:right">
+    <p style="font-size:0.75rem;margin-bottom:0.4rem">
+      <a href="#" onclick="openTerms(event)" style="color:rgba(245,242,235,0.5);text-decoration:underline">Terms of use</a>
+      &nbsp;·&nbsp;
+      <a href="#" onclick="openPrivacy(event)" style="color:rgba(245,242,235,0.5);text-decoration:underline">Privacy</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:hello@[YOURDOMAIN].com" style="color:rgba(245,242,235,0.5);text-decoration:underline">Contact</a>
+    </p>
+    <p style="font-size:0.75rem;color:rgba(245,242,235,0.35)">© 2025 [COMPANY NAME]. All rights reserved.</p>
+    <p style="font-size:0.7rem;color:rgba(245,242,235,0.25);margin-top:4px">Content protected under Indian Copyright Act, 1957.</p>
+  </div>
+</footer>
+
+<!-- TERMS MODAL -->
+<div class="modal-overlay" id="terms-modal">
+  <div class="modal" style="max-width:520px;text-align:left;max-height:90vh;overflow-y:auto">
+    <h3 style="margin-bottom:1rem">Terms of use</h3>
+    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem"><strong>Last updated:</strong> 2025</p>
+    <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;line-height:1.7">By accessing or using Demystify AI ("the product"), you agree to the following terms. If you do not agree, please do not use the product.</p>
+
+    <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.25rem">1. Ownership &amp; intellectual property</p>
+    <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;line-height:1.7">All content, code, design, interactive modules, and written material on this platform are the exclusive property of <strong>[COMPANY NAME]</strong> and its creator. This work is protected under the Indian Copyright Act, 1957. Unauthorised reproduction, redistribution, resale, or derivative use — in whole or in part — is strictly prohibited.</p>
+
+    <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.25rem">2. Permitted use</p>
+    <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;line-height:1.7">You may access and use this product for your own personal learning. You may share the URL with others. You may not copy, reproduce, screenshot for redistribution, reverse-engineer, or resell any part of this product without written permission.</p>
+
+    <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.25rem">3. Payments &amp; access</p>
+    <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;line-height:1.7">Full access is granted upon confirmed payment. Access is personal and non-transferable. Corporate licences are governed by a separate agreement.</p>
+
+    <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.25rem">4. No warranty</p>
+    <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;line-height:1.7">This product is provided for educational purposes. While every effort is made to keep content accurate and up to date, no guarantees are made regarding completeness or fitness for a specific purpose.</p>
+
+    <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.25rem">5. Governing law</p>
+    <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.7">These terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of courts in Hyderabad, Telangana.</p>
+
+    <p style="font-size:0.75rem;color:var(--muted);margin-bottom:1rem">For permissions or queries: <a href="mailto:hello@[YOURDOMAIN].com" style="color:var(--accent)">hello@[YOURDOMAIN].com</a></p>
+    <button class="btn-primary" style="width:100%;justify-content:center" onclick="document.getElementById('terms-modal').classList.remove('open')">Got it →</button>
+  </div>
+</div>
+
+<!-- PRIVACY MODAL -->
+<div class="modal-overlay" id="privacy-modal">
+  <div class="modal" style="max-width:520px;text-align:left;max-height:90vh;overflow-y:auto">
+    <h3 style="margin-bottom:1rem">Privacy policy</h3>
+    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem"><strong>Last updated:</strong> 2025</p>
+
+    <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.25rem">What we collect</p>
+    <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;line-height:1.7">When you submit your email to access the product or request full access, we collect your name and email address. We do not collect any other personal data. We do not use cookies for tracking.</p>
+
+    <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.25rem">How we use it</p>
+    <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;line-height:1.7">Your email is used solely to send you access details, product updates, and — with your consent — occasional announcements about new modules. We do not sell, share, or rent your data to any third party.</p>
+
+    <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.25rem">Your rights</p>
+    <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1rem;line-height:1.7">You may request deletion of your data at any time by emailing us. We will remove your information within 7 business days.</p>
+
+    <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.25rem">Governing law</p>
+    <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.7">This policy is governed by the Information Technology Act, 2000 and the Digital Personal Data Protection Act, 2023 (India).</p>
+
+    <p style="font-size:0.75rem;color:var(--muted);margin-bottom:1rem">Questions: <a href="mailto:hello@[YOURDOMAIN].com" style="color:var(--accent)">hello@[YOURDOMAIN].com</a></p>
+    <button class="btn-primary" style="width:100%;justify-content:center" onclick="document.getElementById('privacy-modal').classList.remove('open')">Got it →</button>
+  </div>
+</div>
+
+</div><!-- end #landing -->
+
+
+<!-- ═══════════════════════════════════════════
+     APP SHELL (shown after entry)
+═══════════════════════════════════════════ -->
+<div id="app">
+  <div class="app-nav">
+    <div class="app-logo">Demystify <span>AI</span></div>
+    <div class="app-tabs" id="appTabs">
+      <button class="app-tab active" onclick="showPanel('journey', this)">LLM journey</button>
+      <button class="app-tab" onclick="showPanel('france', this)">Capital of France</button>
+      <button class="app-tab locked" onclick="tryLocked()">Uncle → Aunt</button>
+      <button class="app-tab locked" onclick="tryLocked()">Temperature</button>
+      <button class="app-tab locked" onclick="tryLocked()">Medical AI</button>
+    </div>
+    <button class="exit-btn" onclick="exitApp()">← Back</button>
+  </div>
+
+  <!-- ── PANEL 1: LLM JOURNEY ── -->
+  <div class="app-panel active" id="panel-journey">
+    <div class="module-hero">
+      <h3>How an LLM is built — the full story</h3>
+      <p>Six stages, every term connected. Step through in order.</p>
+    </div>
+    <div class="prog-bar" id="j-prog">
+      <div class="prog-seg done" id="jp0"></div>
+      <div class="prog-seg" id="jp1"></div>
+      <div class="prog-seg" id="jp2"></div>
+      <div class="prog-seg" id="jp3"></div>
+      <div class="prog-seg" id="jp4"></div>
+      <div class="prog-seg" id="jp5"></div>
+    </div>
+    <div class="step-tabs">
+      <button class="step-tab active" onclick="jStep(0,this)" id="jt0"><div class="step-tab-dot" style="background:#888"></div>Raw data</button>
+      <button class="step-tab" onclick="jStep(1,this)" id="jt1"><div class="step-tab-dot" style="background:var(--purple)"></div>Tokens</button>
+      <button class="step-tab" onclick="jStep(2,this)" id="jt2"><div class="step-tab-dot" style="background:var(--teal)"></div>Pre-train</button>
+      <button class="step-tab" onclick="jStep(3,this)" id="jt3"><div class="step-tab-dot" style="background:var(--coral)"></div>Fine-tune</button>
+      <button class="step-tab" onclick="jStep(4,this)" id="jt4"><div class="step-tab-dot" style="background:var(--amber)"></div>RLHF</button>
+      <button class="step-tab" onclick="jStep(5,this)" id="jt5"><div class="step-tab-dot" style="background:var(--accent2)"></div>Inference</button>
+    </div>
+
+    <div class="step-content active" id="jc0">
+      <div class="info-card"><h4>Stage 1 — the raw ingredients</h4><p>Before anything called "AI" exists, there is just text. Enormous amounts of it — scraped from the internet, books, code, Wikipedia, scientific papers. GPT-3 alone was trained on ~45TB of text.</p></div>
+      <div class="card-row">
+        <div class="mini-stat"><div class="mini-stat-val">~15T</div><div class="mini-stat-lbl">tokens of training data</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">45 TB</div><div class="mini-stat-lbl">raw text (GPT-3)</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">0</div><div class="mini-stat-lbl">model exists yet</div></div>
+      </div>
+      <div class="callout-warn">The model doesn't "read" this data like you read a book. It sees it as a giant prediction task — given the words so far, what comes next?</div>
+      <div class="nav-row"><button class="nav-btn nav-btn-accent" onclick="jStep(1,document.getElementById('jt1'))">Next: Tokens →</button></div>
+    </div>
+
+    <div class="step-content" id="jc1">
+      <div class="info-card"><h4>Stage 2 — tokens: the atomic unit</h4><p>The model can't read letters directly. A tokeniser splits every piece of text into <strong>tokens</strong> — chunks the model processes as numbers. Roughly ¾ of a word per token on average.</p></div>
+      <div class="info-card">
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:8px">Sentence: "The Renaissance changed everything"</p>
+        <div class="token-row">
+          <span class="tok" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">The</span>
+          <span class="tok" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5"> Ren</span>
+          <span class="tok" style="background:#FAECE7;color:#712B13;border-color:#F0997B">aissance</span>
+          <span class="tok" style="background:#FAEEDA;color:#633806;border-color:#EF9F27"> changed</span>
+          <span class="tok" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC"> everything</span>
+        </div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:6px">5 tokens · "Renaissance" splits because it's rare · each token becomes a number, then an embedding vector</p>
+      </div>
+      <div class="callout-info">Each token ID maps to an <strong>embedding</strong> — a list of ~1,000–12,000 numbers capturing its meaning. This is the bridge from language to maths.</div>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="jStep(0,document.getElementById('jt0'))">← Back</button>
+        <button class="nav-btn nav-btn-accent" onclick="jStep(2,document.getElementById('jt2'))">Next: Pre-training →</button>
+      </div>
+    </div>
+
+    <div class="step-content" id="jc2">
+      <div class="info-card"><h4>Stage 3 — pre-training: the big expensive one</h4><p>The model reads tokens, predicts the next one, checks if it was right, adjusts its <strong>parameters</strong> slightly, and repeats — trillions of times. This is where knowledge is absorbed.</p></div>
+      <div class="card-row">
+        <div class="mini-stat"><div class="mini-stat-val">Months</div><div class="mini-stat-lbl">duration</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">$100M+</div><div class="mini-stat-lbl">typical cost</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">1000s</div><div class="mini-stat-lbl">GPUs running 24/7</div></div>
+      </div>
+      <div class="callout-warn">At the end of pre-training: the model is extraordinarily capable but has no personality and no idea how to behave as an assistant. Ask it something and it might just continue your sentence.</div>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="jStep(1,document.getElementById('jt1'))">← Back</button>
+        <button class="nav-btn nav-btn-accent" onclick="jStep(3,document.getElementById('jt3'))">Next: Fine-tuning →</button>
+      </div>
+    </div>
+
+    <div class="step-content" id="jc3">
+      <div class="info-card"><h4>Stage 4 — fine-tuning: teaching it to behave</h4><p>Using a much smaller curated dataset of human-written Q&A pairs (~10K–100K examples), the model is trained to be a helpful assistant. Same knowledge, new behaviour.</p></div>
+      <div class="callout-warn" style="margin-bottom:8px"><strong>Before fine-tuning:</strong> "What is 2+2?" → "What is 2+2? This question appears in many primary school curricula..."</div>
+      <div class="callout-ok"><strong>After fine-tuning:</strong> "What is 2+2?" → "2+2 = 4."</div>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="jStep(2,document.getElementById('jt2'))">← Back</button>
+        <button class="nav-btn nav-btn-accent" onclick="jStep(4,document.getElementById('jt4'))">Next: RLHF →</button>
+      </div>
+    </div>
+
+    <div class="step-content" id="jc4">
+      <div class="info-card"><h4>Stage 5 — RLHF: the human feedback loop</h4><p><strong>Reinforcement Learning from Human Feedback.</strong> The model generates multiple answers. Humans rank them. A reward model learns what "good" looks like. That signal is used to nudge the main model toward higher-rated outputs.</p></div>
+      <p style="font-size:0.875rem;color:var(--muted);margin-bottom:8px">Real example — "How do I get rid of a headache?"</p>
+      <div class="rating-row">
+        <div class="rating-card"><div class="stars">★★★★★</div><div class="rating-text">"Try drinking water, resting in a dark room, or taking paracetamol. See a doctor if it persists."</div></div>
+        <div class="rating-card"><div class="stars">★★★☆☆</div><div class="rating-text">"Headaches have many causes. Common remedies include staying hydrated and avoiding bright light..."</div></div>
+        <div class="rating-card"><div class="stars">★☆☆☆☆</div><div class="rating-text">"Here is a comprehensive list of 47 things that can cause headaches: 1. Tension headaches caused by..."</div></div>
+      </div>
+      <div class="callout-ok">This is why Claude says "I don't know" instead of making things up. RLHF trained it to prefer honest uncertainty over confident hallucination.</div>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="jStep(3,document.getElementById('jt3'))">← Back</button>
+        <button class="nav-btn nav-btn-accent" onclick="jStep(5,document.getElementById('jt5'))">Next: Inference →</button>
+      </div>
+    </div>
+
+    <div class="step-content" id="jc5">
+      <div class="info-card"><h4>Stage 6 — inference: the moment you type</h4><p>The model is trained and frozen. Every time you send a message, here is what happens in milliseconds:</p>
+        <ol style="margin-top:8px;padding-left:1.2rem;font-size:0.875rem;color:var(--muted);line-height:2">
+          <li><strong style="color:var(--purple)">Tokenise</strong> — your message splits into token IDs</li>
+          <li><strong style="color:var(--teal)">Embed</strong> — each ID becomes a vector of numbers</li>
+          <li><strong style="color:var(--coral)">Attend</strong> — each token looks at all others, weighting relevance</li>
+          <li><strong style="color:var(--amber)">Transform</strong> — vectors flow through 96+ layers of parameters</li>
+          <li><strong style="color:var(--accent2)">Predict</strong> — output probabilities for every next token; pick one; repeat</li>
+        </ol>
+      </div>
+      <div class="callout-info">Every word you see me write is one token predicted at a time. There is no "full answer" pre-computed — it generates left to right, using everything from pre-training + fine-tuning + RLHF.</div>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="jStep(4,document.getElementById('jt4'))">← Back</button>
+        <button class="nav-btn nav-btn-accent" onclick="showPanel('france', document.querySelectorAll('.app-tab')[1])">See it live: France example →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANEL 2: CAPITAL OF FRANCE ── -->
+  <div class="app-panel" id="panel-france">
+    <div class="module-hero">
+      <h3>"What is the capital of France?"</h3>
+      <p>Follow one question through every stage of LLM inference — tokens, embeddings, attention, and output.</p>
+    </div>
+
+    <div class="prog-bar" id="f-prog">
+      <div class="prog-seg done" id="fp0"></div>
+      <div class="prog-seg" id="fp1"></div>
+      <div class="prog-seg" id="fp2"></div>
+      <div class="prog-seg" id="fp3"></div>
+    </div>
+    <div class="step-tabs">
+      <button class="step-tab active" onclick="fStep(0,this)" id="ft0"><div class="step-tab-dot" style="background:var(--purple)"></div>Tokenise</button>
+      <button class="step-tab" onclick="fStep(1,this)" id="ft1"><div class="step-tab-dot" style="background:var(--teal)"></div>Embed</button>
+      <button class="step-tab" onclick="fStep(2,this)" id="ft2"><div class="step-tab-dot" style="background:var(--amber)"></div>Attend</button>
+      <button class="step-tab" onclick="fStep(3,this)" id="ft3"><div class="step-tab-dot" style="background:var(--accent2)"></div>Answer</button>
+    </div>
+
+    <div class="step-content active" id="fc0">
+      <div class="info-card">
+        <h4>Step 1 — tokenisation</h4>
+        <p style="margin-bottom:10px">Your question is split into tokens. Each becomes a number the model can process.</p>
+        <div class="token-row">
+          <span class="tok" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">What</span>
+          <span class="tok" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5"> is</span>
+          <span class="tok" style="background:#FAECE7;color:#712B13;border-color:#F0997B"> the</span>
+          <span class="tok" style="background:#FAEEDA;color:#633806;border-color:#EF9F27"> capital</span>
+          <span class="tok" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC"> of</span>
+          <span class="tok" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5"> France</span>
+          <span class="tok" style="background:#FAECE7;color:#712B13;border-color:#F0997B">?</span>
+        </div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:8px">7 tokens · "France" = token ID 14881 · "capital" = token ID 6864 · and so on</p>
+      </div>
+      <div class="callout-info">Notice the space before each word is part of the token. The model learns that " France" (with a space) is different from "France" at the start of a sentence.</div>
+      <div class="nav-row"><button class="nav-btn nav-btn-accent" onclick="fStep(1,document.getElementById('ft1'))">Next: Embeddings →</button></div>
+    </div>
+
+    <div class="step-content" id="fc1">
+      <div class="info-card">
+        <h4>Step 2 — embeddings: meaning as coordinates</h4>
+        <p style="margin-bottom:10px">Each token ID maps to a vector — a list of numbers placing the word in a high-dimensional space where similar meanings cluster together.</p>
+      </div>
+      <div class="vec-space" id="vec-france">
+        <div class="vec-dot" id="vd-france" style="width:14px;height:14px;background:#534AB7;left:55%;top:30%" onclick="selectDot('france')"></div>
+        <div class="vec-lbl" id="vl-france" style="left:calc(55% + 10px);top:calc(30% - 6px);color:#534AB7">France</div>
+        <div class="vec-dot" style="width:12px;height:12px;background:#534AB7;left:60%;top:40%;opacity:.7"></div>
+        <div class="vec-lbl" style="left:calc(60% + 8px);top:calc(40% - 5px);color:#534AB7;opacity:.7">Germany</div>
+        <div class="vec-dot" style="width:12px;height:12px;background:#534AB7;left:52%;top:44%;opacity:.7"></div>
+        <div class="vec-lbl" style="left:calc(52% + 8px);top:calc(44% - 5px);color:#534AB7;opacity:.7">Italy</div>
+        <div class="vec-dot" id="vd-paris" style="width:14px;height:14px;background:#1D9E75;left:57%;top:55%" onclick="selectDot('paris')"></div>
+        <div class="vec-lbl" id="vl-paris" style="left:calc(57% + 10px);top:calc(55% - 6px);color:#1D9E75">Paris</div>
+        <div class="vec-dot" style="width:12px;height:12px;background:#1D9E75;left:63%;top:62%;opacity:.7"></div>
+        <div class="vec-lbl" style="left:calc(63% + 8px);top:calc(62% - 5px);color:#1D9E75;opacity:.7">Berlin</div>
+        <div class="vec-dot" style="width:12px;height:12px;background:#1D9E75;left:51%;top:65%;opacity:.7"></div>
+        <div class="vec-lbl" style="left:calc(51% + 8px);top:calc(65% - 5px);color:#1D9E75;opacity:.7">Rome</div>
+        <div class="vec-dot" style="width:10px;height:10px;background:#888;left:18%;top:35%;opacity:.5"></div>
+        <div class="vec-lbl" style="left:calc(18% + 8px);top:calc(35% - 5px);color:#888;opacity:.5;font-size:10px">Apple</div>
+        <div class="vec-dot" style="width:10px;height:10px;background:#888;left:15%;top:55%;opacity:.5"></div>
+        <div class="vec-lbl" style="left:calc(15% + 8px);top:calc(55% - 5px);color:#888;opacity:.5;font-size:10px">Banana</div>
+        <div class="vec-dot" style="width:10px;height:10px;background:#888;left:22%;top:65%;opacity:.5"></div>
+        <div class="vec-lbl" style="left:calc(22% + 8px);top:calc(65% - 5px);color:#888;opacity:.5;font-size:10px">Mango</div>
+      </div>
+      <p id="vec-info" style="font-size:0.8rem;color:var(--muted);margin-bottom:10px">Click any dot to explore the embedding space</p>
+      <div class="callout-info">Countries cluster near countries. Capitals cluster near capitals. France and Paris are semantically closer than France and Apple — the model learned this from reading billions of sentences.</div>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="fStep(0,document.getElementById('ft0'))">← Back</button>
+        <button class="nav-btn nav-btn-accent" onclick="fStep(2,document.getElementById('ft2'))">Next: Attention →</button>
+      </div>
+    </div>
+
+    <div class="step-content" id="fc2">
+      <div class="info-card">
+        <h4>Step 3 — attention: what the model focuses on</h4>
+        <p style="margin-bottom:10px">Attention heads let each token look at every other token. The thickness shows how much "France" attends to each other word when predicting the answer.</p>
+      </div>
+      <div style="background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1rem">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+          <span style="padding:6px 12px;background:#f0f4fd;border:1.5px solid var(--accent2);border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:var(--accent2);font-weight:500">What</span>
+          <span style="padding:6px 12px;background:#f0f4fd;border:1px solid #d0d9f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#6b8ccc;opacity:.6">is</span>
+          <span style="padding:6px 12px;background:#f0f4fd;border:1px solid #d0d9f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#6b8ccc;opacity:.6">the</span>
+          <span style="padding:6px 12px;background:#fff7ed;border:2px solid var(--coral);border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:var(--coral);font-weight:500">capital</span>
+          <span style="padding:6px 12px;background:#f0f4fd;border:1px solid #d0d9f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#6b8ccc;opacity:.5">of</span>
+          <span style="padding:6px 12px;background:#fff3e8;border:2.5px solid var(--accent);border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:var(--accent);font-weight:700">France</span>
+          <span style="padding:6px 12px;background:#f0f4fd;border:1px solid #d0d9f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#6b8ccc;opacity:.4">?</span>
+        </div>
+        <p style="font-size:0.8rem;color:var(--muted)">Border thickness = attention weight. "France" and "capital" are the hot tokens — they carry the most signal for generating the answer.</p>
+      </div>
+      <div class="callout-ok">This is what makes transformers powerful. Unlike older models, attention lets every token see every other token simultaneously — not just left-to-right.</div>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="fStep(1,document.getElementById('ft1'))">← Back</button>
+        <button class="nav-btn nav-btn-accent" onclick="fStep(3,document.getElementById('ft3'))">Next: The answer →</button>
+      </div>
+    </div>
+
+    <div class="step-content" id="fc3">
+      <div class="info-card">
+        <h4>Step 4 — the output: one token at a time</h4>
+        <p style="margin-bottom:10px">The model doesn't output "Paris" all at once. It outputs probabilities for every possible next token, picks the highest, appends it, and repeats.</p>
+      </div>
+      <div style="background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1rem">
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px">Top token probabilities after processing the question:</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:'DM Mono',monospace;font-size:13px;width:80px">Paris</span>
+            <div style="flex:1;height:8px;background:rgba(15,14,12,0.07);border-radius:4px;overflow:hidden"><div style="width:97%;height:100%;background:var(--teal);border-radius:4px"></div></div>
+            <span style="font-size:12px;color:var(--muted);width:36px;text-align:right">97.2%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:'DM Mono',monospace;font-size:13px;width:80px">Lyon</span>
+            <div style="flex:1;height:8px;background:rgba(15,14,12,0.07);border-radius:4px;overflow:hidden"><div style="width:2%;height:100%;background:var(--muted);border-radius:4px"></div></div>
+            <span style="font-size:12px;color:var(--muted);width:36px;text-align:right">1.4%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:'DM Mono',monospace;font-size:13px;width:80px">Marseille</span>
+            <div style="flex:1;height:8px;background:rgba(15,14,12,0.07);border-radius:4px;overflow:hidden"><div style="width:1%;height:100%;background:var(--muted);border-radius:4px;opacity:.6"></div></div>
+            <span style="font-size:12px;color:var(--muted);width:36px;text-align:right">0.8%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:'DM Mono',monospace;font-size:13px;width:80px">Berlin</span>
+            <div style="flex:1;height:8px;background:rgba(15,14,12,0.07);border-radius:4px;overflow:hidden"><div style="width:0.5%;height:100%;background:var(--muted);border-radius:4px;opacity:.4"></div></div>
+            <span style="font-size:12px;color:var(--muted);width:36px;text-align:right">0.2%</span>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding:10px 14px;background:#eaf6f1;border-radius:8px;font-family:'DM Mono',monospace;font-size:14px;color:#085041">→ "The capital of France is <strong>Paris</strong>."</div>
+      </div>
+      <div class="callout-info">For factual questions like this, temperature barely matters — Paris wins by such a massive margin. This is different for open-ended questions like "write a paragraph on the Renaissance" — which is a full access example.</div>
+      <div class="gate-overlay" style="margin-top:1rem">
+        <div class="gate-blur">
+          <div class="info-card" style="margin:0"><h4>Next: Uncle → Aunt — semantic reasoning</h4><p>Watch the model navigate gender relationships in vector space to get from "Uncle" to "Aunt". The king−man+woman=queen moment, visualised.</p></div>
+        </div>
+        <div class="gate-card">
+          <h4>Continue the journey</h4>
+          <p>The Uncle → Aunt example, temperature simulator, medical AI, and model comparison are in full access.</p>
+          <button class="btn-primary" style="font-size:0.9rem;padding:.75rem 1.5rem" onclick="openGate('individual')">Get full access — ₹999 →</button>
+        </div>
+      </div>
+      <div class="nav-row"><button class="nav-btn" onclick="fStep(2,document.getElementById('ft2'))">← Back</button></div>
+    </div>
+  </div>
+
+</div><!-- end #app -->
+
+
+<!-- ═══ MODALS ═══ -->
+<div class="modal-overlay" id="gate-modal">
+  <div class="modal" id="gate-content">
+    <h3>Get full access</h3>
+    <p>Enter your details and we'll reach out with payment link and instant access.</p>
+    <input type="text" id="gate-name" placeholder="Your name">
+    <input type="email" id="gate-email" placeholder="Your email">
+    <button class="btn-primary" onclick="submitGate()">Send me access →</button><br>
+    <button class="modal-close" onclick="closeGate()">Maybe later</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="free-modal">
+  <div class="modal">
+    <h3>Start learning — free</h3>
+    <p>No card needed. Just drop your email so we can send you updates when new modules drop.</p>
+    <input type="email" id="free-email" placeholder="your@email.com">
+    <button class="btn-primary" onclick="enterFree()">Start for free →</button><br>
+    <button class="modal-close" onclick="skipEmail()">Skip — just let me in</button>
+  </div>
+</div>
+
+<script>
+// ── STATE ──
+let isUnlocked = false;
+let currentGateType = 'individual';
+let jCurrent = 0;
+let fCurrent = 0;
+
+// ── NAVIGATION ──
+function openFreeModule() {
+  document.getElementById('free-modal').classList.add('open');
+}
+function skipEmail() {
+  document.getElementById('free-modal').classList.remove('open');
+  enterApp();
+}
+function enterFree() {
+  const email = document.getElementById('free-email').value;
+  document.getElementById('free-modal').classList.remove('open');
+  enterApp();
+}
+function enterApp() {
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  window.scrollTo(0,0);
+}
+function exitApp() {
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('landing').style.display = 'block';
+  window.scrollTo(0,0);
+}
+function scrollToPricing() {
+  document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── PANEL SWITCHING ──
+function showPanel(id, btn) {
+  document.querySelectorAll('.app-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.app-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+function tryLocked() {
+  openGate('individual');
+}
+
+// ── JOURNEY STEPS ──
+function jStep(n, btn) {
+  document.querySelectorAll('#panel-journey .step-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('#panel-journey .step-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('jc' + n).classList.add('active');
+  btn.classList.add('active');
+  jCurrent = n;
+  for (let i = 0; i < 6; i++) {
+    const s = document.getElementById('jp' + i);
+    if (s) s.style.background = i <= n ? 'var(--accent)' : 'var(--border)';
+  }
+}
+
+// ── FRANCE STEPS ──
+function fStep(n, btn) {
+  document.querySelectorAll('#panel-france .step-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('#panel-france .step-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('fc' + n).classList.add('active');
+  btn.classList.add('active');
+  fCurrent = n;
+  for (let i = 0; i < 4; i++) {
+    const s = document.getElementById('fp' + i);
+    if (s) s.style.background = i <= n ? 'var(--accent)' : 'var(--border)';
+  }
+}
+
+// ── VECTOR DOT INTERACTION ──
+function selectDot(id) {
+  const info = document.getElementById('vec-info');
+  if (id === 'france') {
+    info.textContent = '"France" clusters near Germany, Italy — same semantic category (European countries). Far from Apple, Mango — completely different category.';
+    info.style.color = '#534AB7';
+  } else if (id === 'paris') {
+    info.textContent = '"Paris" clusters near Berlin, Rome — all capitals. Notice it\'s also close to France — because Paris is the capital OF France. The model learned this relationship.';
+    info.style.color = '#1D9E75';
+  }
+}
+
+// ── GATE ──
+function openGate(type) {
+  currentGateType = type;
+  const modal = document.getElementById('gate-modal');
+  const content = document.getElementById('gate-content');
+  if (type === 'corporate') {
+    content.querySelector('h3').textContent = 'Talk to us about teams';
+    content.querySelector('p').textContent = 'Tell us your team size and industry. We\'ll put together a custom proposal within 24 hours.';
+  } else {
+    content.querySelector('h3').textContent = 'Get full access';
+    content.querySelector('p').textContent = 'Enter your details and we\'ll reach out with payment link and instant access.';
+  }
+  modal.classList.add('open');
+}
+function closeGate() {
+  document.getElementById('gate-modal').classList.remove('open');
+}
+function submitGate() {
+  const name = document.getElementById('gate-name').value;
+  const email = document.getElementById('gate-email').value;
+  if (!email) { alert('Please enter your email.'); return; }
+  document.getElementById('gate-modal').classList.remove('open');
+  document.getElementById('gate-name').value = '';
+  document.getElementById('gate-email').value = '';
+  const msg = currentGateType === 'corporate'
+    ? "Thanks! We'll be in touch within 24 hours with a custom proposal."
+    : "Thanks! We'll send the payment link to " + email + " within a few hours.";
+  alert(msg);
+}
+
+// Close modals on overlay click
+document.getElementById('gate-modal').addEventListener('click', function(e) { if (e.target === this) closeGate(); });
+document.getElementById('free-modal').addEventListener('click', function(e) { if (e.target === this) skipEmail(); });
+document.getElementById('terms-modal').addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
+document.getElementById('privacy-modal').addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
+
+function openTerms(e) { if(e) e.preventDefault(); document.getElementById('terms-modal').classList.add('open'); }
+function openPrivacy(e) { if(e) e.preventDefault(); document.getElementById('privacy-modal').classList.add('open'); }
+
+// ── PASSWORD GATE ──
+// This is the SHA-256 hash of "DEMYSTIFY2025" (placeholder password)
+// Replace this entire string with YOUR OWN hash — see instructions at top of file
+const STORED_HASH = '76f186cc4ee29ffb1809c1f6866e478e08772e7733d0ed210f7837e8a806efb3';
+
+async function hashPassword(pw) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  return [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2,'0')).join('');
+}
+
+async function checkPassword() {
+  const input = document.getElementById('pw-input').value;
+  const err = document.getElementById('pw-error');
+  if (!input) { showPwError(); return; }
+  const hashed = await hashPassword(input);
+  if (hashed === STORED_HASH) {
+    // Correct — animate gate out, show site
+    sessionStorage.setItem('da_auth', '1');
+    const gate = document.getElementById('pw-gate');
+    gate.style.transition = 'opacity .5s';
+    gate.style.opacity = '0';
+    setTimeout(() => {
+      gate.style.display = 'none';
+      document.getElementById('landing').style.display = 'block';
+    }, 500);
+  } else {
+    showPwError();
+  }
+}
+
+function showPwError() {
+  const err = document.getElementById('pw-error');
+  const input = document.getElementById('pw-input');
+  err.style.opacity = '1';
+  input.style.borderColor = 'rgba(200,65,10,0.8)';
+  input.value = '';
+  input.focus();
+  setTimeout(() => {
+    err.style.opacity = '0';
+    input.style.borderColor = 'rgba(245,242,235,0.12)';
+  }, 3000);
+}
+
+// Check if already authenticated this session
+(function() {
+  if (sessionStorage.getItem('da_auth') === '1') {
+    document.getElementById('pw-gate').style.display = 'none';
+    document.getElementById('landing').style.display = 'block';
+  }
+})();
+</script>
+</body>
+</html>
