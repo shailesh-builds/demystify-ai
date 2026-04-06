@@ -872,7 +872,7 @@ footer p { font-size: 0.8rem; }
       &nbsp;·&nbsp;
       <a href="#" onclick="openPrivacy(event)" style="color:rgba(245,242,235,0.5);text-decoration:underline">Privacy</a>
       &nbsp;·&nbsp;
-      <a href="mailto:hello@[YOURDOMAIN].com" style="color:rgba(245,242,235,0.5);text-decoration:underline">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#b5ddd0d9d9daf5eeecfae0e7f1faf8f4fcfbe89bd6dad8" style="color:rgba(245,242,235,0.5);text-decoration:underline">Contact</a>
     </p>
     <p style="font-size:0.75rem;color:rgba(245,242,235,0.35)">© 2025 [COMPANY NAME]. All rights reserved.</p>
     <p style="font-size:0.7rem;color:rgba(245,242,235,0.25);margin-top:4px">Content protected under Indian Copyright Act, 1957.</p>
@@ -901,7 +901,7 @@ footer p { font-size: 0.8rem; }
     <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.25rem">5. Governing law</p>
     <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.7">These terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of courts in Hyderabad, Telangana.</p>
 
-    <p style="font-size:0.75rem;color:var(--muted);margin-bottom:1rem">For permissions or queries: <a href="mailto:hello@[YOURDOMAIN].com" style="color:var(--accent)">hello@[YOURDOMAIN].com</a></p>
+    <p style="font-size:0.75rem;color:var(--muted);margin-bottom:1rem">For permissions or queries: <a href="/cdn-cgi/l/email-protection#d9b1bcb5b5b6998280968c8b9d969498909784f7bab6b4" style="color:var(--accent)">hello@[YOURDOMAIN].com</a></p>
     <button class="btn-primary" style="width:100%;justify-content:center" onclick="document.getElementById('terms-modal').classList.remove('open')">Got it →</button>
   </div>
 </div>
@@ -924,7 +924,7 @@ footer p { font-size: 0.8rem; }
     <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.25rem">Governing law</p>
     <p style="font-size:0.875rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.7">This policy is governed by the Information Technology Act, 2000 and the Digital Personal Data Protection Act, 2023 (India).</p>
 
-    <p style="font-size:0.75rem;color:var(--muted);margin-bottom:1rem">Questions: <a href="mailto:hello@[YOURDOMAIN].com" style="color:var(--accent)">hello@[YOURDOMAIN].com</a></p>
+    <p style="font-size:0.75rem;color:var(--muted);margin-bottom:1rem">Questions: <a href="/cdn-cgi/l/email-protection#39515c555556796260766c6b7d767478707764175a5654" style="color:var(--accent)">hello@[YOURDOMAIN].com</a></p>
     <button class="btn-primary" style="width:100%;justify-content:center" onclick="document.getElementById('privacy-modal').classList.remove('open')">Got it →</button>
   </div>
 </div>
@@ -933,14 +933,16 @@ footer p { font-size: 0.8rem; }
 
 
 <!-- ═══════════════════════════════════════════
-     APP SHELL (shown after entry)
+<!-- ═══════════════════════════════════════════
+     APP SHELL
 ═══════════════════════════════════════════ -->
 <div id="app">
   <div class="app-nav">
     <div class="app-logo">Demystify <span>AI</span></div>
     <div class="app-tabs" id="appTabs">
-      <button class="app-tab active" onclick="showPanel('journey', this)">LLM journey</button>
-      <button class="app-tab" onclick="showPanel('france', this)">Capital of France</button>
+      <button class="app-tab active" onclick="showPanel('intro',this)">What is AI?</button>
+      <button class="app-tab" onclick="showPanel('journey',this)">How LLMs are built</button>
+      <button class="app-tab" onclick="showPanel('france',this)">Live example</button>
       <button class="app-tab locked" onclick="tryLocked()">Uncle → Aunt</button>
       <button class="app-tab locked" onclick="tryLocked()">Temperature</button>
       <button class="app-tab locked" onclick="tryLocked()">Medical AI</button>
@@ -948,13 +950,100 @@ footer p { font-size: 0.8rem; }
     <button class="exit-btn" onclick="exitApp()">← Back</button>
   </div>
 
-  <!-- ── PANEL 1: LLM JOURNEY ── -->
-  <div class="app-panel active" id="panel-journey">
+  <!-- PANEL 0: WHAT IS AI -->
+  <div class="app-panel active" id="panel-intro">
     <div class="module-hero">
-      <h3>How an LLM is built — the full story</h3>
-      <p>Six stages, every term connected. Step through in order.</p>
+      <h3>What is AI — and why should you care?</h3>
+      <p>Before tokens, embeddings, and parameters — let's understand what we're actually talking about.</p>
     </div>
-    <div class="prog-bar" id="j-prog">
+
+    <div class="info-card" style="border-left:3px solid var(--accent);border-radius:0 14px 14px 0">
+      <h4 style="margin-bottom:0.5rem">Start here: the honest definition</h4>
+      <p style="line-height:1.9">Artificial Intelligence is not a robot. It's not magic. It's not sentient. At its core, AI is <strong>software that learns patterns from data and uses those patterns to make predictions or decisions.</strong> That's it. The "intelligence" is borrowed — learned from millions of examples of human-generated content, not invented from scratch.</p>
+    </div>
+
+    <div class="info-card">
+      <h4 style="margin-bottom:0.75rem">A brief, honest history — 3 waves</h4>
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div style="display:flex;gap:14px;padding:14px 0;border-bottom:0.5px solid var(--border)">
+          <div style="min-width:72px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);padding-top:3px;flex-shrink:0">1950s–90s</div>
+          <div>
+            <div style="font-weight:500;font-size:0.95rem;margin-bottom:4px">Wave 1 — Rule-based AI</div>
+            <p style="font-size:0.875rem;color:var(--muted);line-height:1.7">Humans wrote explicit rules: "if temperature &gt; 38°C, flag as fever." These systems were rigid — they could only handle situations the programmer had anticipated. Chess computers like Deep Blue worked this way. Brilliant at one thing, useless at everything else.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;padding:14px 0;border-bottom:0.5px solid var(--border)">
+          <div style="min-width:72px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);padding-top:3px;flex-shrink:0">2000s–15s</div>
+          <div>
+            <div style="font-weight:500;font-size:0.95rem;margin-bottom:4px">Wave 2 — Machine Learning</div>
+            <p style="font-size:0.875rem;color:var(--muted);line-height:1.7">Instead of writing rules, we showed machines thousands of examples and let them find the patterns. "Here are 10,000 spam emails and 10,000 real ones — figure out the difference." Suddenly AI could recognise faces, recommend movies, detect fraud. Your Netflix feed, your bank's fraud system, Google Maps traffic — all Wave 2.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;padding:14px 0">
+          <div style="min-width:72px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);padding-top:3px;flex-shrink:0">2017–now</div>
+          <div>
+            <div style="font-weight:500;font-size:0.95rem;margin-bottom:4px">Wave 3 — Large Language Models</div>
+            <p style="font-size:0.875rem;color:var(--muted);line-height:1.7">A new architecture called the <strong>Transformer</strong> (invented at Google in 2017) allowed models to train on the entire internet at once and learn language at superhuman scale. ChatGPT, Claude, Gemini — all Transformer-based LLMs. This is what this entire course is about.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h4 style="margin-bottom:0.75rem">The three types of AI you'll actually encounter</h4>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">
+        <div style="background:rgba(83,74,183,0.06);border:0.5px solid rgba(83,74,183,0.2);border-radius:12px;padding:14px">
+          <div style="font-weight:500;font-size:0.9rem;color:var(--purple);margin-bottom:6px">Narrow AI</div>
+          <p style="font-size:0.825rem;color:var(--muted);line-height:1.6">Does one thing extremely well. Spotify's recommendation engine, Google Translate, facial recognition. Most AI in the world is narrow AI. It has no understanding — just very good pattern matching on a specific task.</p>
+        </div>
+        <div style="background:rgba(29,158,117,0.06);border:0.5px solid rgba(29,158,117,0.2);border-radius:12px;padding:14px">
+          <div style="font-weight:500;font-size:0.9rem;color:var(--teal);margin-bottom:6px">General AI (LLMs)</div>
+          <p style="font-size:0.825rem;color:var(--muted);line-height:1.6">Can do many things — write, code, analyse, translate, summarise, reason — all from one model. ChatGPT, Claude, Gemini. Still not "thinking" like a human, but flexible enough to handle almost any text-based task.</p>
+        </div>
+        <div style="background:rgba(186,117,23,0.06);border:0.5px solid rgba(186,117,23,0.2);border-radius:12px;padding:14px">
+          <div style="font-weight:500;font-size:0.9rem;color:var(--amber);margin-bottom:6px">AGI (future)</div>
+          <p style="font-size:0.825rem;color:var(--muted);line-height:1.6">Artificial General Intelligence — a machine that matches human cognitive ability across all domains. Does not exist yet. Experts disagree on whether it's 5 years or 50 years away, or possible at all.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h4 style="margin-bottom:0.75rem">What AI is NOT — four myths busted</h4>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--coral);font-weight:700;flex-shrink:0;font-size:1.1rem;margin-top:-2px">✗</span>
+          <div><span style="font-weight:500;font-size:0.9rem">AI does not "think" or "understand."</span><br><span style="font-size:0.875rem;color:var(--muted)">It predicts the statistically most likely next word based on patterns in training data. When Claude explains quantum physics brilliantly, it's because it saw thousands of excellent quantum physics explanations and learned to replicate the patterns — not because it understood the physics.</span></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--coral);font-weight:700;flex-shrink:0;font-size:1.1rem;margin-top:-2px">✗</span>
+          <div><span style="font-weight:500;font-size:0.9rem">AI is not always right.</span><br><span style="font-size:0.875rem;color:var(--muted)">LLMs "hallucinate" — they confidently state things that are factually wrong. This happens because the model optimises for plausible-sounding text, not truth. Always verify critical information from an LLM against authoritative sources.</span></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--coral);font-weight:700;flex-shrink:0;font-size:1.1rem;margin-top:-2px">✗</span>
+          <div><span style="font-weight:500;font-size:0.9rem">AI does not have memory between sessions.</span><br><span style="font-size:0.875rem;color:var(--muted)">Every new conversation starts fresh. The model has no idea who you are unless you tell it. What feels like "memory" in tools like ChatGPT is a feature layered on top — the app stores your history and feeds it back to the model.</span></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--coral);font-weight:700;flex-shrink:0;font-size:1.1rem;margin-top:-2px">✗</span>
+          <div><span style="font-weight:500;font-size:0.9rem">AI is not one thing.</span><br><span style="font-size:0.875rem;color:var(--muted)">ChatGPT, Claude, Gemini, Midjourney, Stable Diffusion, GitHub Copilot, and your phone's face unlock are all "AI" — but they work completely differently, built for different tasks, with very different strengths and weaknesses.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-ok" style="font-size:0.95rem;line-height:1.8">
+      <strong>The one-line definition to remember:</strong> AI is a system that learns patterns from data to make predictions. LLMs specifically learn language patterns at massive scale to generate useful text. Everything else — the hype, the fear, the magic — is built on top of that simple idea.
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn nav-btn-accent" onclick="showPanel('journey', document.querySelectorAll('.app-tab')[1])">Next: How LLMs are built →</button>
+    </div>
+  </div>
+
+  <!-- PANEL 1: LLM JOURNEY -->
+  <div class="app-panel" id="panel-journey">
+    <div class="module-hero">
+      <h3>How an LLM is actually built</h3>
+      <p>Six stages. Every term connected. The real story behind ChatGPT, Claude, and Gemini — from raw text to the answer you get.</p>
+    </div>
+    <div class="prog-bar">
       <div class="prog-seg done" id="jp0"></div>
       <div class="prog-seg" id="jp1"></div>
       <div class="prog-seg" id="jp2"></div>
@@ -971,102 +1060,227 @@ footer p { font-size: 0.8rem; }
       <button class="step-tab" onclick="jStep(5,this)" id="jt5"><div class="step-tab-dot" style="background:var(--accent2)"></div>Inference</button>
     </div>
 
+    <!-- STAGE 0 -->
     <div class="step-content active" id="jc0">
-      <div class="info-card"><h4>Stage 1 — the raw ingredients</h4><p>Before anything called "AI" exists, there is just text. Enormous amounts of it — scraped from the internet, books, code, Wikipedia, scientific papers. GPT-3 alone was trained on ~45TB of text.</p></div>
-      <div class="card-row">
-        <div class="mini-stat"><div class="mini-stat-val">~15T</div><div class="mini-stat-lbl">tokens of training data</div></div>
-        <div class="mini-stat"><div class="mini-stat-val">45 TB</div><div class="mini-stat-lbl">raw text (GPT-3)</div></div>
-        <div class="mini-stat"><div class="mini-stat-val">0</div><div class="mini-stat-lbl">model exists yet</div></div>
+      <div class="info-card" style="border-left:3px solid var(--accent);border-radius:0 14px 14px 0">
+        <h4>Stage 1 — the raw ingredients: a diet of the entire internet</h4>
+        <p style="line-height:1.9;margin-top:0.5rem">Before anything called an "AI" exists, there is just text. Trillions of words scraped from websites, digitised books, academic papers, GitHub repositories, Reddit threads, Wikipedia — in dozens of languages. Think of it as feeding the model every book in every library that has ever existed, plus every conversation on the internet, simultaneously.</p>
+        <p style="line-height:1.9;margin-top:0.75rem;color:var(--muted)">This is called the <strong style="color:var(--ink)">pre-training corpus</strong>. It's not curated or labelled — it's raw. Spam, misinformation, and hate speech sit alongside genius-level essays and textbooks. Cleaning this data is itself a months-long engineering challenge before training even begins.</p>
       </div>
-      <div class="callout-warn">The model doesn't "read" this data like you read a book. It sees it as a giant prediction task — given the words so far, what comes next?</div>
+      <div class="card-row">
+        <div class="mini-stat"><div class="mini-stat-val">~15T</div><div class="mini-stat-lbl">tokens in GPT-4's corpus</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">45 TB</div><div class="mini-stat-lbl">raw text for GPT-3 alone</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">100+</div><div class="mini-stat-lbl">languages represented</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">0</div><div class="mini-stat-lbl">model exists at this point</div></div>
+      </div>
+      <div class="callout-warn"><strong>The key insight most people miss:</strong> The model does not "read" this data the way you read a book. It sees it as one giant prediction challenge — given the words so far, what word comes next? This is called <strong>self-supervised learning</strong>. No human labels anything. The data labels itself.</div>
+      <div class="info-card">
+        <h4 style="margin-bottom:0.5rem">What the training task actually looks like</h4>
+        <p style="font-size:0.875rem;color:var(--muted);margin-bottom:10px">The model is repeatedly shown incomplete sentences and asked to predict the missing word:</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;gap:8px;align-items:center;font-size:0.875rem;flex-wrap:wrap">
+            <span style="font-family:'DM Mono',monospace;background:rgba(15,14,12,0.05);padding:6px 10px;border-radius:6px;flex:1;min-width:180px">"The capital of France is ___"</span>
+            <span style="color:var(--teal);font-weight:500;white-space:nowrap">→ Paris ✓</span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;font-size:0.875rem;flex-wrap:wrap">
+            <span style="font-family:'DM Mono',monospace;background:rgba(15,14,12,0.05);padding:6px 10px;border-radius:6px;flex:1;min-width:180px">"She opened the door and ___"</span>
+            <span style="color:var(--teal);font-weight:500;white-space:nowrap">→ walked ✓</span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;font-size:0.875rem;flex-wrap:wrap">
+            <span style="font-family:'DM Mono',monospace;background:rgba(15,14,12,0.05);padding:6px 10px;border-radius:6px;flex:1;min-width:180px">"def fibonacci(n): return ___"</span>
+            <span style="color:var(--teal);font-weight:500;white-space:nowrap">→ n if n... ✓</span>
+          </div>
+        </div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:10px">Do this trillions of times and the model absorbs grammar, facts, reasoning styles, coding patterns, cultural references. It learns all of this purely from the pattern of what word tends to follow what other words.</p>
+      </div>
       <div class="nav-row"><button class="nav-btn nav-btn-accent" onclick="jStep(1,document.getElementById('jt1'))">Next: Tokens →</button></div>
     </div>
 
+    <!-- STAGE 1 -->
     <div class="step-content" id="jc1">
-      <div class="info-card"><h4>Stage 2 — tokens: the atomic unit</h4><p>The model can't read letters directly. A tokeniser splits every piece of text into <strong>tokens</strong> — chunks the model processes as numbers. Roughly ¾ of a word per token on average.</p></div>
+      <div class="info-card" style="border-left:3px solid var(--purple);border-radius:0 14px 14px 0">
+        <h4>Stage 2 — tokens: the atomic unit of language for AI</h4>
+        <p style="line-height:1.9;margin-top:0.5rem">Computers cannot process letters or words directly — they process numbers. A <strong>tokeniser</strong> splits every piece of text into chunks called <strong>tokens</strong>, and each token gets a unique ID number. The model works exclusively with these numbers, never with the original text.</p>
+        <p style="line-height:1.9;margin-top:0.75rem;color:var(--muted)">Tokens are not exactly words. Common words like "the" and "is" are single tokens, while rare or long words get split into smaller pieces. On average, one token ≈ ¾ of an English word. <strong style="color:var(--ink)">Everything in AI — speed, cost, context limits — is measured in tokens, not words.</strong></p>
+      </div>
       <div class="info-card">
-        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:8px">Sentence: "The Renaissance changed everything"</p>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px;font-weight:500">How "The Renaissance changed everything" gets tokenised:</p>
         <div class="token-row">
           <span class="tok" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">The</span>
-          <span class="tok" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5"> Ren</span>
+          <span class="tok" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5">·Ren</span>
           <span class="tok" style="background:#FAECE7;color:#712B13;border-color:#F0997B">aissance</span>
-          <span class="tok" style="background:#FAEEDA;color:#633806;border-color:#EF9F27"> changed</span>
-          <span class="tok" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC"> everything</span>
+          <span class="tok" style="background:#FAEEDA;color:#633806;border-color:#EF9F27">·changed</span>
+          <span class="tok" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">·everything</span>
         </div>
-        <p style="font-size:0.8rem;color:var(--muted);margin-top:6px">5 tokens · "Renaissance" splits because it's rare · each token becomes a number, then an embedding vector</p>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:8px">5 tokens. "Renaissance" splits into "Ren" + "aissance" — it's rare enough that the tokeniser has no single token for it. The · symbol represents a space, which is part of the token.</p>
       </div>
-      <div class="callout-info">Each token ID maps to an <strong>embedding</strong> — a list of ~1,000–12,000 numbers capturing its meaning. This is the bridge from language to maths.</div>
+      <div class="info-card">
+        <h4 style="margin-bottom:0.75rem">Why tokens matter in the real world</h4>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="color:var(--purple);font-weight:700;flex-shrink:0;font-size:1.1rem">₹</span>
+            <div><span style="font-weight:500;font-size:0.875rem">API pricing is per token.</span><br><span style="font-size:0.875rem;color:var(--muted)">When companies build on the OpenAI or Anthropic API, they pay per 1,000 tokens. A 10-page document is roughly 5,000 tokens. Processing 1 million such documents? You're spending lakhs. Token efficiency is a real cost-optimisation problem for AI teams.</span></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="color:var(--purple);font-weight:700;flex-shrink:0;font-size:1.1rem">📏</span>
+            <div><span style="font-weight:500;font-size:0.875rem">Context windows are in tokens.</span><br><span style="font-size:0.875rem;color:var(--muted)">When you hear "Claude has a 200K context window," it means 200,000 tokens — roughly 150,000 words, or about 500 pages of text. This is how much the model can "see" at once. Older models had just 4,096 tokens (~3,000 words).</span></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="color:var(--purple);font-weight:700;flex-shrink:0;font-size:1.1rem">⚡</span>
+            <div><span style="font-weight:500;font-size:0.875rem">Speed is measured in tokens/second.</span><br><span style="font-size:0.875rem;color:var(--muted)">When you see words appearing one by one in ChatGPT, each word is actually one token being predicted and rendered. Faster models output 100+ tokens/second. You're watching the model think, in real time.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="callout-info">After tokenisation, each token ID gets converted to an <strong>embedding</strong> — a list of ~1,000 to 12,000 numbers representing the token's meaning in a mathematical space. "France" and "Paris" will have embeddings that are mathematically close. "France" and "Banana" will be far apart. This is how the model understands semantic relationships without ever being explicitly taught them.</div>
       <div class="nav-row">
         <button class="nav-btn" onclick="jStep(0,document.getElementById('jt0'))">← Back</button>
         <button class="nav-btn nav-btn-accent" onclick="jStep(2,document.getElementById('jt2'))">Next: Pre-training →</button>
       </div>
     </div>
 
+    <!-- STAGE 2 -->
     <div class="step-content" id="jc2">
-      <div class="info-card"><h4>Stage 3 — pre-training: the big expensive one</h4><p>The model reads tokens, predicts the next one, checks if it was right, adjusts its <strong>parameters</strong> slightly, and repeats — trillions of times. This is where knowledge is absorbed.</p></div>
-      <div class="card-row">
-        <div class="mini-stat"><div class="mini-stat-val">Months</div><div class="mini-stat-lbl">duration</div></div>
-        <div class="mini-stat"><div class="mini-stat-val">$100M+</div><div class="mini-stat-lbl">typical cost</div></div>
-        <div class="mini-stat"><div class="mini-stat-val">1000s</div><div class="mini-stat-lbl">GPUs running 24/7</div></div>
+      <div class="info-card" style="border-left:3px solid var(--teal);border-radius:0 14px 14px 0">
+        <h4>Stage 3 — pre-training: the expensive miracle</h4>
+        <p style="line-height:1.9;margin-top:0.5rem">Pre-training is where the magic happens — and where the money disappears. The model is initialised with random <strong>parameters</strong> (billions of dials all set to random positions). Then it begins training: read tokens, predict the next one, check if it was right, adjust all the dials very slightly to be less wrong, repeat.</p>
+        <p style="line-height:1.9;margin-top:0.75rem;color:var(--muted)">This loop runs <strong style="color:var(--ink)">trillions of times</strong>, across thousands of specialised chips called GPUs, for weeks or months. Every single time the model gets something wrong, a mathematical process called <strong style="color:var(--ink)">backpropagation</strong> calculates which dials to turn and by how much. By the end, the parameters have been tuned so precisely that the model has effectively memorised the patterns of human language, knowledge, and reasoning at extraordinary scale.</p>
       </div>
-      <div class="callout-warn">At the end of pre-training: the model is extraordinarily capable but has no personality and no idea how to behave as an assistant. Ask it something and it might just continue your sentence.</div>
+      <div class="card-row">
+        <div class="mini-stat"><div class="mini-stat-val">$78M+</div><div class="mini-stat-lbl">estimated GPT-4 training cost</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">25,000</div><div class="mini-stat-lbl">GPUs used by some models</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">90–180</div><div class="mini-stat-lbl">days of training duration</div></div>
+        <div class="mini-stat"><div class="mini-stat-val">~1T</div><div class="mini-stat-lbl">parameters in frontier models</div></div>
+      </div>
+      <div class="info-card">
+        <h4 style="margin-bottom:0.5rem">What "parameters" actually are</h4>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.7;margin-bottom:10px">A parameter is a single number inside the model's neural network — a weight measuring how much importance the model assigns to a particular connection between concepts. A model with 7 billion parameters has 7 billion of these weights, all working together to transform input tokens into output tokens.</p>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.7;margin-bottom:10px">Think of the human brain: it has ~100 trillion synaptic connections. Each synapse has a strength — a parameter. When you learn to ride a bicycle, certain synapse strengths change. That's exactly what happens in a neural network during training, just with matrix multiplication instead of biology.</p>
+        <div style="background:rgba(15,14,12,0.04);border-radius:10px;padding:12px;font-size:0.825rem;color:var(--muted)"><strong style="color:var(--ink)">The scale:</strong> GPT-2 (2019) had 1.5B parameters. GPT-3 had 175B. GPT-4 is estimated at ~1.7 trillion. More parameters generally means more capacity — but training data quality matters more than raw size beyond a point.</div>
+      </div>
+      <div class="callout-warn">At the end of pre-training, the model is extraordinarily knowledgeable — it has absorbed millions of books worth of content. But it has no idea how to be helpful. Ask it a question and it may just continue your sentence as if completing a document. It's like hiring a brilliant academic who has read everything ever written but has never had a real conversation. That's what fine-tuning fixes.</div>
       <div class="nav-row">
         <button class="nav-btn" onclick="jStep(1,document.getElementById('jt1'))">← Back</button>
         <button class="nav-btn nav-btn-accent" onclick="jStep(3,document.getElementById('jt3'))">Next: Fine-tuning →</button>
       </div>
     </div>
 
+    <!-- STAGE 3 -->
     <div class="step-content" id="jc3">
-      <div class="info-card"><h4>Stage 4 — fine-tuning: teaching it to behave</h4><p>Using a much smaller curated dataset of human-written Q&A pairs (~10K–100K examples), the model is trained to be a helpful assistant. Same knowledge, new behaviour.</p></div>
-      <div class="callout-warn" style="margin-bottom:8px"><strong>Before fine-tuning:</strong> "What is 2+2?" → "What is 2+2? This question appears in many primary school curricula..."</div>
-      <div class="callout-ok"><strong>After fine-tuning:</strong> "What is 2+2?" → "2+2 = 4."</div>
+      <div class="info-card" style="border-left:3px solid var(--coral);border-radius:0 14px 14px 0">
+        <h4>Stage 4 — fine-tuning: from brilliant recluse to helpful assistant</h4>
+        <p style="line-height:1.9;margin-top:0.5rem">Fine-tuning is the personality transplant. Take the pre-trained model — which has read everything but knows nothing about being useful — and train it on a much smaller, hand-crafted dataset of ideal conversations. These are written by human labellers given detailed instructions on how the ideal AI assistant should behave.</p>
+        <p style="line-height:1.9;margin-top:0.75rem;color:var(--muted)">This process is called <strong style="color:var(--ink)">Supervised Fine-Tuning (SFT)</strong>. The dataset is typically 10,000–500,000 examples. Training takes days, not months. Cost is orders of magnitude lower. But the impact on behaviour is enormous — this is what transforms a document-completion engine into something that feels like a conversation partner.</p>
+      </div>
+      <div class="info-card">
+        <h4 style="margin-bottom:0.75rem">Before and after — same model, completely different behaviour</h4>
+        <p style="font-size:0.75rem;font-family:'DM Mono',monospace;color:var(--muted);margin-bottom:8px">USER ASKS: "Explain machine learning to a 10-year-old"</p>
+        <div style="background:#fff5f3;border:0.5px solid rgba(216,90,48,0.2);border-radius:10px;padding:12px;margin-bottom:8px">
+          <div style="font-size:0.7rem;color:var(--coral);font-weight:500;margin-bottom:4px">BEFORE FINE-TUNING</div>
+          <p style="font-size:0.875rem;color:var(--muted);line-height:1.6">"Explain machine learning to a 10-year-old. This is a common interview question for data science roles. Machine learning is a subset of artificial intelligence that..." [continues as if writing a textbook, never actually answering]</p>
+        </div>
+        <div style="background:#eaf6f1;border:0.5px solid rgba(29,158,117,0.2);border-radius:10px;padding:12px">
+          <div style="font-size:0.7rem;color:var(--teal);font-weight:500;margin-bottom:4px">AFTER FINE-TUNING</div>
+          <p style="font-size:0.875rem;color:var(--muted);line-height:1.6">"Imagine you want to teach your dog to sit. You don't explain it in words — you show it again and again, and reward it when it gets it right. Machine learning works the same way: instead of telling the computer rules, you show it thousands of examples and let it figure out the pattern on its own."</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <h4 style="margin-bottom:0.5rem">Why different AI assistants have different "personalities"</h4>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.7">OpenAI, Anthropic, and Google give their labellers detailed guidance documents — sometimes 100+ pages — describing the ideal assistant. These specify: how to be helpful without being sycophantic, how to handle harmful requests, how to express uncertainty, what tone to use. This is why Claude, ChatGPT, and Gemini feel different even when they have similar underlying capabilities — they were fine-tuned on different instruction datasets with different emphasis.</p>
+      </div>
       <div class="nav-row">
         <button class="nav-btn" onclick="jStep(2,document.getElementById('jt2'))">← Back</button>
         <button class="nav-btn nav-btn-accent" onclick="jStep(4,document.getElementById('jt4'))">Next: RLHF →</button>
       </div>
     </div>
 
+    <!-- STAGE 4 -->
     <div class="step-content" id="jc4">
-      <div class="info-card"><h4>Stage 5 — RLHF: the human feedback loop</h4><p><strong>Reinforcement Learning from Human Feedback.</strong> The model generates multiple answers. Humans rank them. A reward model learns what "good" looks like. That signal is used to nudge the main model toward higher-rated outputs.</p></div>
-      <p style="font-size:0.875rem;color:var(--muted);margin-bottom:8px">Real example — "How do I get rid of a headache?"</p>
-      <div class="rating-row">
-        <div class="rating-card"><div class="stars">★★★★★</div><div class="rating-text">"Try drinking water, resting in a dark room, or taking paracetamol. See a doctor if it persists."</div></div>
-        <div class="rating-card"><div class="stars">★★★☆☆</div><div class="rating-text">"Headaches have many causes. Common remedies include staying hydrated and avoiding bright light..."</div></div>
-        <div class="rating-card"><div class="stars">★☆☆☆☆</div><div class="rating-text">"Here is a comprehensive list of 47 things that can cause headaches: 1. Tension headaches caused by..."</div></div>
+      <div class="info-card" style="border-left:3px solid var(--amber);border-radius:0 14px 14px 0">
+        <h4>Stage 5 — RLHF: teaching the model what "good" feels like</h4>
+        <p style="line-height:1.9;margin-top:0.5rem"><strong>Reinforcement Learning from Human Feedback</strong> is the stage that made modern AI dramatically more useful and safe. The problem fine-tuning doesn't fully solve: the model can produce a good answer and a bad answer, but it doesn't know which is which. RLHF teaches it to prefer the good one.</p>
+        <p style="line-height:1.9;margin-top:0.75rem;color:var(--muted)">Three steps: First, the model generates multiple answers to the same question. Second, human raters rank them best to worst. Third, a separate AI — the <strong style="color:var(--ink)">reward model</strong> — learns to predict human rankings. Then the main model is trained to score well on the reward model. The loop runs until the model consistently produces outputs humans rate highly.</p>
       </div>
-      <div class="callout-ok">This is why Claude says "I don't know" instead of making things up. RLHF trained it to prefer honest uncertainty over confident hallucination.</div>
+      <div class="info-card">
+        <h4 style="margin-bottom:0.75rem">A real RLHF ranking task — "How do I get rid of a headache?"</h4>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px">Three outputs from the same model. Human raters rank them. The model learns to produce more like the top-ranked one.</p>
+        <div class="rating-row">
+          <div class="rating-card" style="border-color:rgba(29,158,117,0.3)">
+            <div class="stars">★★★★★</div>
+            <div style="font-size:0.7rem;color:var(--teal);margin-bottom:4px;font-weight:500">Rated best — why?</div>
+            <div class="rating-text">"Try drinking water, resting in a dark quiet room, and taking paracetamol or ibuprofen if available. A cold compress can help. If the headache is severe, sudden, or accompanies other symptoms, see a doctor."</div>
+            <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">Concise, actionable, appropriately cautious, medically sound.</div>
+          </div>
+          <div class="rating-card">
+            <div class="stars">★★★☆☆</div>
+            <div style="font-size:0.7rem;color:var(--amber);margin-bottom:4px;font-weight:500">Middle rank — why?</div>
+            <div class="rating-text">"Headaches can have many causes including tension, dehydration, poor posture, eye strain, stress, and sinus congestion. Common remedies include staying hydrated..."</div>
+            <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">Informative but buries practical help under a lecture.</div>
+          </div>
+          <div class="rating-card" style="border-color:rgba(216,90,48,0.2)">
+            <div class="stars">★☆☆☆☆</div>
+            <div style="font-size:0.7rem;color:var(--coral);margin-bottom:4px;font-weight:500">Rated worst — why?</div>
+            <div class="rating-text">"Here is a comprehensive list of 47 possible causes of headaches and their corresponding treatments, starting with 1. Tension headaches, which are caused by..."</div>
+            <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">Completely unhelpful. Optimised for appearing thorough, not being useful.</div>
+          </div>
+        </div>
+      </div>
+      <div class="callout-ok"><strong>This is why Claude says "I'm not sure" instead of making things up.</strong> RLHF raters consistently ranked honest uncertainty higher than confident hallucination. After thousands of such examples, the reward model learned that admitting uncertainty is "good" — and the main model was trained to score well on that. Safety and honesty are literally trained in, not bolted on.</div>
+      <div class="info-card">
+        <h4 style="margin-bottom:0.5rem">Anthropic's extra step: Constitutional AI</h4>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.7">Anthropic goes further with Constitutional AI (CAI). Claude is given a written constitution — principles like "be helpful, harmless, and honest" — and trained to critique and revise its own outputs against those principles. This reduces reliance on human raters for harmful content by having Claude learn to self-police using the constitution as a guide.</p>
+      </div>
       <div class="nav-row">
         <button class="nav-btn" onclick="jStep(3,document.getElementById('jt3'))">← Back</button>
         <button class="nav-btn nav-btn-accent" onclick="jStep(5,document.getElementById('jt5'))">Next: Inference →</button>
       </div>
     </div>
 
+    <!-- STAGE 5 -->
     <div class="step-content" id="jc5">
-      <div class="info-card"><h4>Stage 6 — inference: the moment you type</h4><p>The model is trained and frozen. Every time you send a message, here is what happens in milliseconds:</p>
-        <ol style="margin-top:8px;padding-left:1.2rem;font-size:0.875rem;color:var(--muted);line-height:2">
-          <li><strong style="color:var(--purple)">Tokenise</strong> — your message splits into token IDs</li>
-          <li><strong style="color:var(--teal)">Embed</strong> — each ID becomes a vector of numbers</li>
-          <li><strong style="color:var(--coral)">Attend</strong> — each token looks at all others, weighting relevance</li>
-          <li><strong style="color:var(--amber)">Transform</strong> — vectors flow through 96+ layers of parameters</li>
-          <li><strong style="color:var(--accent2)">Predict</strong> — output probabilities for every next token; pick one; repeat</li>
-        </ol>
+      <div class="info-card" style="border-left:3px solid var(--accent2);border-radius:0 14px 14px 0">
+        <h4>Stage 6 — inference: what actually happens when you hit Send</h4>
+        <p style="line-height:1.9;margin-top:0.5rem">Training is done. The model is frozen — no more learning. Now it's deployed. Every time you send a message, a precise sequence of operations fires in milliseconds across powerful servers. Here's exactly what happens:</p>
       </div>
-      <div class="callout-info">Every word you see me write is one token predicted at a time. There is no "full answer" pre-computed — it generates left to right, using everything from pre-training + fine-tuning + RLHF.</div>
+      <div class="info-card">
+        <h4 style="margin-bottom:0.75rem">The inference pipeline — step by step</h4>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="display:flex;gap:14px;padding:12px 0;border-bottom:0.5px solid var(--border)">
+            <div style="min-width:32px;height:32px;background:rgba(83,74,183,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;font-weight:500;color:var(--purple)">1</div>
+            <div><strong style="font-size:0.9rem;color:var(--purple)">Tokenise</strong><p style="font-size:0.875rem;color:var(--muted);margin-top:3px;line-height:1.6">Your message is split into tokens and each is converted to its integer ID. "Hello Claude" → [15496, 1366, 2060]. The model never sees the original text — only numbers.</p></div>
+          </div>
+          <div style="display:flex;gap:14px;padding:12px 0;border-bottom:0.5px solid var(--border)">
+            <div style="min-width:32px;height:32px;background:rgba(29,158,117,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;font-weight:500;color:var(--teal)">2</div>
+            <div><strong style="font-size:0.9rem;color:var(--teal)">Embed</strong><p style="font-size:0.875rem;color:var(--muted);margin-top:3px;line-height:1.6">Each token ID is looked up in an embedding table and replaced with a vector — a list of ~4,096 to 12,288 floating-point numbers. These vectors encode the token's meaning and position in the sequence.</p></div>
+          </div>
+          <div style="display:flex;gap:14px;padding:12px 0;border-bottom:0.5px solid var(--border)">
+            <div style="min-width:32px;height:32px;background:rgba(216,90,48,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;font-weight:500;color:var(--coral)">3</div>
+            <div><strong style="font-size:0.9rem;color:var(--coral)">Attend</strong><p style="font-size:0.875rem;color:var(--muted);margin-top:3px;line-height:1.6">Multi-head attention fires. Every token computes a "query" and compares it against the "keys" of every other token. High similarity = high attention weight. Each token becomes aware of every other token in the context, weighted by relevance. This is how the model knows that "bank" in "river bank" differs from "bank" in "bank account."</p></div>
+          </div>
+          <div style="display:flex;gap:14px;padding:12px 0;border-bottom:0.5px solid var(--border)">
+            <div style="min-width:32px;height:32px;background:rgba(186,117,23,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;font-weight:500;color:var(--amber)">4</div>
+            <div><strong style="font-size:0.9rem;color:var(--amber)">Transform</strong><p style="font-size:0.875rem;color:var(--muted);margin-top:3px;line-height:1.6">The attended vectors pass through feed-forward neural network layers — 96 to 128 layers in large models. Each layer refines the representation further, progressively building a richer understanding of what the input means and what response is appropriate.</p></div>
+          </div>
+          <div style="display:flex;gap:14px;padding:12px 0">
+            <div style="min-width:32px;height:32px;background:rgba(42,109,217,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem;font-weight:500;color:var(--accent2)">5</div>
+            <div><strong style="font-size:0.9rem;color:var(--accent2)">Predict and repeat</strong><p style="font-size:0.875rem;color:var(--muted);margin-top:3px;line-height:1.6">The final layer outputs a probability score for every token in the vocabulary (typically 50,000–100,000 tokens). The model samples from this distribution, appends the chosen token to the input, and the entire process repeats. This is why the response appears word by word — each word is a separate forward pass through the entire model.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="callout-info">There is no "full answer" stored anywhere. The model generates left to right, one token at a time, with no knowledge of what it will say next until it says it. The coherence you experience in a long Claude response is emergent — arising from training, not from any plan or script.</div>
       <div class="nav-row">
         <button class="nav-btn" onclick="jStep(4,document.getElementById('jt4'))">← Back</button>
-        <button class="nav-btn nav-btn-accent" onclick="showPanel('france', document.querySelectorAll('.app-tab')[1])">See it live: France example →</button>
+        <button class="nav-btn nav-btn-accent" onclick="showPanel('france', document.querySelectorAll('.app-tab')[2])">See it live with a real example →</button>
       </div>
     </div>
   </div>
 
-  <!-- ── PANEL 2: CAPITAL OF FRANCE ── -->
+  <!-- PANEL 2: CAPITAL OF FRANCE -->
   <div class="app-panel" id="panel-france">
     <div class="module-hero">
       <h3>"What is the capital of France?"</h3>
-      <p>Follow one question through every stage of LLM inference — tokens, embeddings, attention, and output.</p>
+      <p>One simple question. Follow it through every stage of inference — tokenisation, embeddings, attention, and output. Watch the theory become reality.</p>
     </div>
-
-    <div class="prog-bar" id="f-prog">
+    <div class="prog-bar">
       <div class="prog-seg done" id="fp0"></div>
       <div class="prog-seg" id="fp1"></div>
       <div class="prog-seg" id="fp2"></div>
@@ -1080,51 +1294,74 @@ footer p { font-size: 0.8rem; }
     </div>
 
     <div class="step-content active" id="fc0">
+      <div class="info-card" style="border-left:3px solid var(--purple);border-radius:0 14px 14px 0">
+        <h4>Step 1 — tokenisation: breaking the question into pieces</h4>
+        <p style="line-height:1.9;margin-top:0.5rem">Before anything else, your question is handed to a tokeniser. It has no idea what the words mean — it just applies learned splitting rules to convert text into token IDs. Here's how "What is the capital of France?" becomes the model's input:</p>
+      </div>
       <div class="info-card">
-        <h4>Step 1 — tokenisation</h4>
-        <p style="margin-bottom:10px">Your question is split into tokens. Each becomes a number the model can process.</p>
-        <div class="token-row">
+        <div class="token-row" style="margin-bottom:14px">
           <span class="tok" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">What</span>
-          <span class="tok" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5"> is</span>
-          <span class="tok" style="background:#FAECE7;color:#712B13;border-color:#F0997B"> the</span>
-          <span class="tok" style="background:#FAEEDA;color:#633806;border-color:#EF9F27"> capital</span>
-          <span class="tok" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC"> of</span>
-          <span class="tok" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5"> France</span>
+          <span class="tok" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5">·is</span>
+          <span class="tok" style="background:#FAECE7;color:#712B13;border-color:#F0997B">·the</span>
+          <span class="tok" style="background:#FAEEDA;color:#633806;border-color:#EF9F27">·capital</span>
+          <span class="tok" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">·of</span>
+          <span class="tok" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5">·France</span>
           <span class="tok" style="background:#FAECE7;color:#712B13;border-color:#F0997B">?</span>
         </div>
-        <p style="font-size:0.8rem;color:var(--muted);margin-top:8px">7 tokens · "France" = token ID 14881 · "capital" = token ID 6864 · and so on</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;gap:8px;font-size:0.8rem;flex-wrap:wrap">
+            <span style="font-family:'DM Mono',monospace;background:rgba(83,74,183,0.08);padding:3px 8px;border-radius:4px;color:#3C3489;min-width:70px;text-align:center">What</span>
+            <span style="color:var(--muted)">→ Token ID <strong style="color:var(--ink);font-family:'DM Mono',monospace">2</strong> — one of the most common words; always a single token</span>
+          </div>
+          <div style="display:flex;gap:8px;font-size:0.8rem;flex-wrap:wrap">
+            <span style="font-family:'DM Mono',monospace;background:rgba(186,117,23,0.08);padding:3px 8px;border-radius:4px;color:#633806;min-width:70px;text-align:center">·capital</span>
+            <span style="color:var(--muted)">→ Token ID <strong style="color:var(--ink);font-family:'DM Mono',monospace">6864</strong> — common enough to be one token; leading space is included</span>
+          </div>
+          <div style="display:flex;gap:8px;font-size:0.8rem;flex-wrap:wrap">
+            <span style="font-family:'DM Mono',monospace;background:rgba(29,158,117,0.08);padding:3px 8px;border-radius:4px;color:#085041;min-width:70px;text-align:center">·France</span>
+            <span style="color:var(--muted)">→ Token ID <strong style="color:var(--ink);font-family:'DM Mono',monospace">4881</strong> — a frequent proper noun; stays as one token</span>
+          </div>
+          <div style="display:flex;gap:8px;font-size:0.8rem;flex-wrap:wrap">
+            <span style="font-family:'DM Mono',monospace;background:rgba(216,90,48,0.08);padding:3px 8px;border-radius:4px;color:#712B13;min-width:70px;text-align:center">?</span>
+            <span style="color:var(--muted)">→ Token ID <strong style="color:var(--ink);font-family:'DM Mono',monospace">30</strong> — punctuation is its own token; signals question intent</span>
+          </div>
+        </div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:10px">Total: 7 tokens. The model now has the array [2, 318, 262, 3139, 286, 4881, 30] and will never see the original text again.</p>
       </div>
-      <div class="callout-info">Notice the space before each word is part of the token. The model learns that " France" (with a space) is different from "France" at the start of a sentence.</div>
+      <div class="callout-info">The tokeniser used here is GPT's BPE (Byte-Pair Encoding). Claude uses a different tokeniser with a larger vocabulary. Different models tokenise differently — which is why the same sentence can cost different amounts on different APIs.</div>
       <div class="nav-row"><button class="nav-btn nav-btn-accent" onclick="fStep(1,document.getElementById('ft1'))">Next: Embeddings →</button></div>
     </div>
 
     <div class="step-content" id="fc1">
+      <div class="info-card" style="border-left:3px solid var(--teal);border-radius:0 14px 14px 0">
+        <h4>Step 2 — embeddings: the geometry of meaning</h4>
+        <p style="line-height:1.9;margin-top:0.5rem">Each token ID is looked up in an embedding table — a giant matrix learned during pre-training. The result is a vector: thousands of numbers that position the token in a high-dimensional space. Words with similar meanings end up with similar vectors. The model "knows" that France and Paris are related without anyone explicitly teaching it that relationship.</p>
+      </div>
       <div class="info-card">
-        <h4>Step 2 — embeddings: meaning as coordinates</h4>
-        <p style="margin-bottom:10px">Each token ID maps to a vector — a list of numbers placing the word in a high-dimensional space where similar meanings cluster together.</p>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px;font-weight:500">A simplified 2D view of the embedding space — click any dot:</p>
+        <div class="vec-space" id="vec-france">
+          <div class="vec-dot" id="vd-france" style="width:14px;height:14px;background:#534AB7;left:55%;top:28%" onclick="selectDot('france')"></div>
+          <div class="vec-lbl" id="vl-france" style="left:calc(55% + 12px);top:calc(28% - 6px);color:#534AB7;font-size:12px">France</div>
+          <div class="vec-dot" style="width:11px;height:11px;background:#534AB7;left:62%;top:36%;opacity:.65"></div>
+          <div class="vec-lbl" style="left:calc(62% + 8px);top:calc(36% - 5px);color:#534AB7;opacity:.65;font-size:11px">Germany</div>
+          <div class="vec-dot" style="width:11px;height:11px;background:#534AB7;left:50%;top:40%;opacity:.65"></div>
+          <div class="vec-lbl" style="left:calc(50% + 8px);top:calc(40% - 5px);color:#534AB7;opacity:.65;font-size:11px">Spain</div>
+          <div class="vec-dot" id="vd-paris" style="width:14px;height:14px;background:#1D9E75;left:58%;top:52%" onclick="selectDot('paris')"></div>
+          <div class="vec-lbl" id="vl-paris" style="left:calc(58% + 12px);top:calc(52% - 6px);color:#1D9E75;font-size:12px">Paris</div>
+          <div class="vec-dot" style="width:11px;height:11px;background:#1D9E75;left:65%;top:60%;opacity:.65"></div>
+          <div class="vec-lbl" style="left:calc(65% + 8px);top:calc(60% - 5px);color:#1D9E75;opacity:.65;font-size:11px">Berlin</div>
+          <div class="vec-dot" style="width:11px;height:11px;background:#1D9E75;left:53%;top:63%;opacity:.65"></div>
+          <div class="vec-lbl" style="left:calc(53% + 8px);top:calc(63% - 5px);color:#1D9E75;opacity:.65;font-size:11px">Madrid</div>
+          <div class="vec-dot" style="width:9px;height:9px;background:#888;left:16%;top:28%;opacity:.4"></div>
+          <div class="vec-lbl" style="left:calc(16% + 7px);top:calc(28% - 4px);color:#888;opacity:.4;font-size:10px">Mango</div>
+          <div class="vec-dot" style="width:9px;height:9px;background:#888;left:12%;top:48%;opacity:.4"></div>
+          <div class="vec-lbl" style="left:calc(12% + 7px);top:calc(48% - 4px);color:#888;opacity:.4;font-size:10px">Banana</div>
+          <div class="vec-dot" style="width:9px;height:9px;background:#888;left:20%;top:62%;opacity:.4"></div>
+          <div class="vec-lbl" style="left:calc(20% + 7px);top:calc(62% - 4px);color:#888;opacity:.4;font-size:10px">Apple</div>
+        </div>
+        <p id="vec-info" style="font-size:0.8rem;color:var(--muted);margin-top:8px;min-height:40px">↑ Click France or Paris to see their relationship explained</p>
       </div>
-      <div class="vec-space" id="vec-france">
-        <div class="vec-dot" id="vd-france" style="width:14px;height:14px;background:#534AB7;left:55%;top:30%" onclick="selectDot('france')"></div>
-        <div class="vec-lbl" id="vl-france" style="left:calc(55% + 10px);top:calc(30% - 6px);color:#534AB7">France</div>
-        <div class="vec-dot" style="width:12px;height:12px;background:#534AB7;left:60%;top:40%;opacity:.7"></div>
-        <div class="vec-lbl" style="left:calc(60% + 8px);top:calc(40% - 5px);color:#534AB7;opacity:.7">Germany</div>
-        <div class="vec-dot" style="width:12px;height:12px;background:#534AB7;left:52%;top:44%;opacity:.7"></div>
-        <div class="vec-lbl" style="left:calc(52% + 8px);top:calc(44% - 5px);color:#534AB7;opacity:.7">Italy</div>
-        <div class="vec-dot" id="vd-paris" style="width:14px;height:14px;background:#1D9E75;left:57%;top:55%" onclick="selectDot('paris')"></div>
-        <div class="vec-lbl" id="vl-paris" style="left:calc(57% + 10px);top:calc(55% - 6px);color:#1D9E75">Paris</div>
-        <div class="vec-dot" style="width:12px;height:12px;background:#1D9E75;left:63%;top:62%;opacity:.7"></div>
-        <div class="vec-lbl" style="left:calc(63% + 8px);top:calc(62% - 5px);color:#1D9E75;opacity:.7">Berlin</div>
-        <div class="vec-dot" style="width:12px;height:12px;background:#1D9E75;left:51%;top:65%;opacity:.7"></div>
-        <div class="vec-lbl" style="left:calc(51% + 8px);top:calc(65% - 5px);color:#1D9E75;opacity:.7">Rome</div>
-        <div class="vec-dot" style="width:10px;height:10px;background:#888;left:18%;top:35%;opacity:.5"></div>
-        <div class="vec-lbl" style="left:calc(18% + 8px);top:calc(35% - 5px);color:#888;opacity:.5;font-size:10px">Apple</div>
-        <div class="vec-dot" style="width:10px;height:10px;background:#888;left:15%;top:55%;opacity:.5"></div>
-        <div class="vec-lbl" style="left:calc(15% + 8px);top:calc(55% - 5px);color:#888;opacity:.5;font-size:10px">Banana</div>
-        <div class="vec-dot" style="width:10px;height:10px;background:#888;left:22%;top:65%;opacity:.5"></div>
-        <div class="vec-lbl" style="left:calc(22% + 8px);top:calc(65% - 5px);color:#888;opacity:.5;font-size:10px">Mango</div>
-      </div>
-      <p id="vec-info" style="font-size:0.8rem;color:var(--muted);margin-bottom:10px">Click any dot to explore the embedding space</p>
-      <div class="callout-info">Countries cluster near countries. Capitals cluster near capitals. France and Paris are semantically closer than France and Apple — the model learned this from reading billions of sentences.</div>
+      <div class="callout-info"><strong>The famous example:</strong> King − Man + Woman ≈ Queen. Take the embedding for "King", subtract "Man", add "Woman" — you get a vector very close to "Queen". The model learned gender and royalty as geometric relationships in vector space, entirely from reading text. This is exactly the "Uncle → Aunt" example in full access.</div>
       <div class="nav-row">
         <button class="nav-btn" onclick="fStep(0,document.getElementById('ft0'))">← Back</button>
         <button class="nav-btn nav-btn-accent" onclick="fStep(2,document.getElementById('ft2'))">Next: Attention →</button>
@@ -1132,23 +1369,29 @@ footer p { font-size: 0.8rem; }
     </div>
 
     <div class="step-content" id="fc2">
+      <div class="info-card" style="border-left:3px solid var(--amber);border-radius:0 14px 14px 0">
+        <h4>Step 3 — attention: how the model reads between the lines</h4>
+        <p style="line-height:1.9;margin-top:0.5rem">Attention is the key innovation that made modern AI possible. Before Transformers (pre-2017), models read text left to right sequentially — they could easily forget what was said at the start of a long sentence. The Transformer's attention mechanism lets every token simultaneously look at every other token and decide how much to focus on each one.</p>
+        <p style="line-height:1.9;margin-top:0.75rem;color:var(--muted)">Think of it like a team meeting where everyone listens to everyone else simultaneously, not just to the person speaking. Each token asks: "Which other tokens are most relevant to understanding my role here?" The answer gets encoded as weights — numbers that determine how much influence each token has on each other token's final representation.</p>
+      </div>
       <div class="info-card">
-        <h4>Step 3 — attention: what the model focuses on</h4>
-        <p style="margin-bottom:10px">Attention heads let each token look at every other token. The thickness shows how much "France" attends to each other word when predicting the answer.</p>
-      </div>
-      <div style="background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1rem">
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
-          <span style="padding:6px 12px;background:#f0f4fd;border:1.5px solid var(--accent2);border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:var(--accent2);font-weight:500">What</span>
-          <span style="padding:6px 12px;background:#f0f4fd;border:1px solid #d0d9f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#6b8ccc;opacity:.6">is</span>
-          <span style="padding:6px 12px;background:#f0f4fd;border:1px solid #d0d9f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#6b8ccc;opacity:.6">the</span>
-          <span style="padding:6px 12px;background:#fff7ed;border:2px solid var(--coral);border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:var(--coral);font-weight:500">capital</span>
-          <span style="padding:6px 12px;background:#f0f4fd;border:1px solid #d0d9f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#6b8ccc;opacity:.5">of</span>
-          <span style="padding:6px 12px;background:#fff3e8;border:2.5px solid var(--accent);border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:var(--accent);font-weight:700">France</span>
-          <span style="padding:6px 12px;background:#f0f4fd;border:1px solid #d0d9f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#6b8ccc;opacity:.4">?</span>
+        <h4 style="margin-bottom:0.75rem">Attention weights visualised — border thickness = attention</h4>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:12px">When the model builds its representation of what's being asked, "capital" and "France" carry the most semantic weight:</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="padding:8px 12px;background:#f0f4fd;border:1px solid #c5d4f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#8899cc;opacity:.55">What</span>
+          <span style="padding:8px 12px;background:#f0f4fd;border:1px solid #c5d4f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#8899cc;opacity:.5">is</span>
+          <span style="padding:8px 12px;background:#f0f4fd;border:1px solid #c5d4f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#8899cc;opacity:.45">the</span>
+          <span style="padding:8px 12px;background:#fff7ed;border:2.5px solid var(--coral);border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:var(--coral);font-weight:600">capital</span>
+          <span style="padding:8px 12px;background:#f0f4fd;border:1px solid #c5d4f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#8899cc;opacity:.4">of</span>
+          <span style="padding:8px 12px;background:#fff3e8;border:3px solid var(--accent);border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:var(--accent);font-weight:700">France</span>
+          <span style="padding:8px 12px;background:#f0f4fd;border:1px solid #c5d4f0;border-radius:8px;font-size:13px;font-family:'DM Mono',monospace;color:#8899cc;opacity:.35">?</span>
         </div>
-        <p style="font-size:0.8rem;color:var(--muted)">Border thickness = attention weight. "France" and "capital" are the hot tokens — they carry the most signal for generating the answer.</p>
+        <p style="font-size:0.8rem;color:var(--muted);line-height:1.6">The model has learned that in questions of the form "What is the X of Y?", the words X and Y carry the most semantic weight. "What", "is", "the", "of", "?" are structural glue — necessary but low-information. So most attention flows to "capital" and "France."</p>
       </div>
-      <div class="callout-ok">This is what makes transformers powerful. Unlike older models, attention lets every token see every other token simultaneously — not just left-to-right.</div>
+      <div class="info-card">
+        <h4 style="margin-bottom:0.5rem">Multi-head attention — multiple perspectives simultaneously</h4>
+        <p style="font-size:0.875rem;color:var(--muted);line-height:1.7">Large models run attention in parallel multiple times — GPT-4 uses 128 attention heads. Each head learns to attend to different relationship types: one may focus on grammatical dependencies, another on semantic similarity, another on positional proximity. Outputs of all heads are concatenated and projected, giving a richer, multi-dimensional understanding.</p>
+      </div>
       <div class="nav-row">
         <button class="nav-btn" onclick="fStep(1,document.getElementById('ft1'))">← Back</button>
         <button class="nav-btn nav-btn-accent" onclick="fStep(3,document.getElementById('ft3'))">Next: The answer →</button>
@@ -1156,45 +1399,48 @@ footer p { font-size: 0.8rem; }
     </div>
 
     <div class="step-content" id="fc3">
-      <div class="info-card">
-        <h4>Step 4 — the output: one token at a time</h4>
-        <p style="margin-bottom:10px">The model doesn't output "Paris" all at once. It outputs probabilities for every possible next token, picks the highest, appends it, and repeats.</p>
+      <div class="info-card" style="border-left:3px solid var(--accent2);border-radius:0 14px 14px 0">
+        <h4>Step 4 — generating the answer: probability all the way down</h4>
+        <p style="line-height:1.9;margin-top:0.5rem">After passing through all the attention layers, the model arrives at its final representation of the input. It does not retrieve "Paris" from a database. It computes a probability distribution across its entire vocabulary — every possible next token — and samples from that distribution.</p>
+        <p style="line-height:1.9;margin-top:0.75rem;color:var(--muted)">For factual questions with clear right answers, the distribution is heavily skewed. The word is appended to the input, and the entire pipeline runs again to predict the next word, and the next, until a stop token is predicted.</p>
       </div>
       <div style="background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1rem">
-        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px">Top token probabilities after processing the question:</p>
-        <div style="display:flex;flex-direction:column;gap:6px">
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:12px;font-weight:500">Probability distribution over vocabulary after processing the question:</p>
+        <div style="display:flex;flex-direction:column;gap:8px">
           <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-family:'DM Mono',monospace;font-size:13px;width:80px">Paris</span>
-            <div style="flex:1;height:8px;background:rgba(15,14,12,0.07);border-radius:4px;overflow:hidden"><div style="width:97%;height:100%;background:var(--teal);border-radius:4px"></div></div>
-            <span style="font-size:12px;color:var(--muted);width:36px;text-align:right">97.2%</span>
+            <span style="font-family:'DM Mono',monospace;font-size:13px;width:90px;color:var(--teal);font-weight:500">Paris</span>
+            <div style="flex:1;height:10px;background:rgba(15,14,12,0.07);border-radius:5px;overflow:hidden"><div style="width:97.2%;height:100%;background:var(--teal);border-radius:5px"></div></div>
+            <span style="font-size:12px;font-weight:500;color:var(--teal);width:44px;text-align:right">97.2%</span>
           </div>
           <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-family:'DM Mono',monospace;font-size:13px;width:80px">Lyon</span>
-            <div style="flex:1;height:8px;background:rgba(15,14,12,0.07);border-radius:4px;overflow:hidden"><div style="width:2%;height:100%;background:var(--muted);border-radius:4px"></div></div>
-            <span style="font-size:12px;color:var(--muted);width:36px;text-align:right">1.4%</span>
+            <span style="font-family:'DM Mono',monospace;font-size:13px;width:90px;color:var(--muted)">Lyon</span>
+            <div style="flex:1;height:10px;background:rgba(15,14,12,0.07);border-radius:5px;overflow:hidden"><div style="width:1.4%;height:100%;background:var(--muted);border-radius:5px"></div></div>
+            <span style="font-size:12px;color:var(--muted);width:44px;text-align:right">1.4%</span>
           </div>
           <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-family:'DM Mono',monospace;font-size:13px;width:80px">Marseille</span>
-            <div style="flex:1;height:8px;background:rgba(15,14,12,0.07);border-radius:4px;overflow:hidden"><div style="width:1%;height:100%;background:var(--muted);border-radius:4px;opacity:.6"></div></div>
-            <span style="font-size:12px;color:var(--muted);width:36px;text-align:right">0.8%</span>
+            <span style="font-family:'DM Mono',monospace;font-size:13px;width:90px;color:var(--muted)">Marseille</span>
+            <div style="flex:1;height:10px;background:rgba(15,14,12,0.07);border-radius:5px;overflow:hidden"><div style="width:0.8%;height:100%;background:var(--muted);border-radius:5px;opacity:.6"></div></div>
+            <span style="font-size:12px;color:var(--muted);width:44px;text-align:right">0.8%</span>
           </div>
           <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-family:'DM Mono',monospace;font-size:13px;width:80px">Berlin</span>
-            <div style="flex:1;height:8px;background:rgba(15,14,12,0.07);border-radius:4px;overflow:hidden"><div style="width:0.5%;height:100%;background:var(--muted);border-radius:4px;opacity:.4"></div></div>
-            <span style="font-size:12px;color:var(--muted);width:36px;text-align:right">0.2%</span>
+            <span style="font-family:'DM Mono',monospace;font-size:13px;width:90px;color:var(--muted)">Berlin</span>
+            <div style="flex:1;height:10px;background:rgba(15,14,12,0.07);border-radius:5px;overflow:hidden"><div style="width:0.2%;height:100%;background:var(--muted);border-radius:5px;opacity:.4"></div></div>
+            <span style="font-size:12px;color:var(--muted);width:44px;text-align:right">0.2%</span>
           </div>
         </div>
-        <div style="margin-top:12px;padding:10px 14px;background:#eaf6f1;border-radius:8px;font-family:'DM Mono',monospace;font-size:14px;color:#085041">→ "The capital of France is <strong>Paris</strong>."</div>
+        <div style="margin-top:14px;padding:12px 16px;background:#eaf6f1;border-radius:10px;font-family:'DM Mono',monospace;font-size:14px;color:#085041;display:flex;align-items:center;gap:8px">
+          <span style="opacity:.6">→</span><strong>"The capital of France is Paris."</strong>
+        </div>
       </div>
-      <div class="callout-info">For factual questions like this, temperature barely matters — Paris wins by such a massive margin. This is different for open-ended questions like "write a paragraph on the Renaissance" — which is a full access example.</div>
-      <div class="gate-overlay" style="margin-top:1rem">
+      <div class="callout-info"><strong>Temperature and factual questions:</strong> Temperature controls randomness in sampling. At temperature=0 the model always picks the highest-probability token — always "Paris." For factual questions like this it barely matters since Paris wins by such a massive margin. But for "write a poem about the ocean," temperature dramatically changes the output — which is exactly the full access Temperature module.</div>
+      <div class="gate-overlay" style="margin-top:1.5rem">
         <div class="gate-blur">
-          <div class="info-card" style="margin:0"><h4>Next: Uncle → Aunt — semantic reasoning</h4><p>Watch the model navigate gender relationships in vector space to get from "Uncle" to "Aunt". The king−man+woman=queen moment, visualised.</p></div>
+          <div class="info-card" style="margin:0"><h4>Next: Uncle → Aunt — semantic vector arithmetic</h4><p>If Man is male and Woman is female, what is the female for Uncle? Watch the model navigate gender in vector space to arrive at Aunt. The king−man+woman=queen analogy, made fully interactive.</p></div>
         </div>
         <div class="gate-card">
           <h4>Continue the journey</h4>
-          <p>The Uncle → Aunt example, temperature simulator, medical AI, and model comparison are in full access.</p>
-          <button class="btn-primary" style="font-size:0.9rem;padding:.75rem 1.5rem" onclick="openGate('individual')">Get full access — ₹999 →</button>
+          <p>The Uncle → Aunt example, temperature simulator, medical AI fine-tuning demo, and model comparison lab are in full access.</p>
+          <button class="btn-primary" style="font-size:0.9rem;padding:.75rem 1.75rem" onclick="openGate('individual')">Get full access — ₹999 →</button>
         </div>
       </div>
       <div class="nav-row"><button class="nav-btn" onclick="fStep(2,document.getElementById('ft2'))">← Back</button></div>
@@ -1226,7 +1472,7 @@ footer p { font-size: 0.8rem; }
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── STATE ──
 let isUnlocked = false;
 let currentGateType = 'individual';
@@ -1392,13 +1638,4 @@ function showPwError() {
   }, 3000);
 }
 
-// Check if already authenticated this session
-(function() {
-  if (sessionStorage.getItem('da_auth') === '1') {
-    document.getElementById('pw-gate').style.display = 'none';
-    document.getElementById('landing').style.display = 'block';
-  }
-})();
-</script>
-</body>
-</html>
+// Check if already authenticate
